@@ -1,0 +1,150 @@
+/*
+    Fontes utilizadas
+    font-family: 'IBM Plex Sans KR', sans-serif; (h1,h2,h3,h4,h5,h6)
+    font-family: 'Noto Sans', sans-serif;(Paragrafos e outros textos)
+*/
+:root{
+    --cor-primaria-normal: #1FAB89; /*botão normal*/
+    --cor-primaria-escura: #007B5C; /*botão hover*/
+    --cor-primaria-clara: #60DDB9; /*botão active*/
+    --cor-background: #FBFBFB;
+    --cor-section: #fff;
+}
+
+body{
+    font-family: 'Noto Sans', sans-serif;
+    background-color: var(--cor-background);
+}
+
+h1, h2, h3, h4, h5, h6, a.btn{
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    color: #383838;
+}
+
+.fs-1{
+    font-size: 3rem !important;
+}
+.fs-2{
+    font-size: 2.375rem !important;
+}
+
+span.fs-2{
+    font-size: 1.875rem !important;
+}
+.fs-3{
+    font-size: 1.5rem !important;
+}
+.fs-4{
+    font-size: 1.25rem !important;
+}
+.fs-5{
+    font-size: 1rem !important;
+}
+
+.mb-6{
+    margin-bottom: 4rem;
+}
+
+.bg-primary{
+    background-color: var(--cor-primaria-escura) !important;
+}
+
+.bg-light{
+    background-color: var(--cor-section);
+}
+
+.icon-procurar{
+    color: var(--cor-primaria-normal);
+    cursor: pointer;
+}
+
+a.btn{
+    color: #fff;
+    font-weight: 600;
+}
+
+.btn-entrar{
+    transition: background-color .5s ease-out;
+}
+
+.btn-primary{
+    background-color: var(--cor-primaria-normal);
+    border: none;
+}
+
+.btn-primary:focus, .btn-entrar:focus{
+    box-shadow: 0 0 0 0.25rem var(--cor-primaria-clara);
+    background: var(--cor-primaria-normal) !important;
+}
+
+.btn-secondary{
+    background-color: transparent !important;
+    color: #383838 !important;
+    transition: all .35s ease-out;
+    border: 3px solid var(--cor-primaria-normal);
+    padding: 8px 32px !important;
+}
+
+.btn-secondary.active{
+    background-color: var(--cor-primaria-normal) !important;
+    color: #fff !important;
+    transition: all .35s ease-out;
+    border: 3px solid var(--cor-primaria-normal);
+}
+
+.btn-secondary:hover{
+    background-color: var(--cor-primaria-escura) !important;
+    color: #fff !important;
+    transition: all .35s ease-out;
+    border: 3px solid var(--cor-primaria-escura);
+}
+
+.btn-primary:hover{
+    background-color: #007B5C;
+    border: none;
+    transition: background-color .25s ease-out;
+}
+
+.btn-primary:active, .btn-secondary:active{
+    background-color: var(--cor-primaria-clara) !important;
+    border: none;
+}
+
+.btn-secondary:active{
+    border-color: var(--cor-primaria-clara);
+}
+
+.btn-criar:hover, .btn-entrar:hover{
+    background-color: #00b487;
+    color: #fff;
+}
+
+a.btn:not(a.btn-xl){
+    padding: 12px 32px;
+}
+
+a.btn-xl{
+    padding: 16px 54.5px;
+    font-size: 18px;
+    border-radius: 0;
+}
+
+.banner-div{
+    height: 675px;
+    background: transparent linear-gradient(180deg, #00000099 0%, #54545400 100%) 0% 0% no-repeat padding-box;
+    width: 100%;
+}
+
+.banner-div .fs-1, .banner-div .fs-2, .banner-div .fs-4{
+    color: #fff;
+}
+
+.banner{
+    background: url(../imgs/Mask\ Group\ 8.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+
+
+
+
