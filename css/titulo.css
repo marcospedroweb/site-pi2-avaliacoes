@@ -50,8 +50,18 @@ span.fs-2 {
 .fs-4 {
   font-size: 1.25rem !important;
 }
-.fs-5 {
+.fs-5,
+p {
   font-size: 1rem !important;
+}
+
+.mb-6 {
+  margin-bottom: 4rem;
+}
+
+.my-6 {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
 }
 
 .mb-6 {
@@ -63,7 +73,7 @@ span.fs-2 {
 }
 
 .bg-light {
-  background-color: var(--cor-section);
+  background-color: var(--cor-section) !important;
 }
 
 a.btn {
@@ -184,15 +194,6 @@ a.btn,
   height: 32px;
 }
 
-#usuario-img {
-  display: block;
-  max-width: 100%;
-  width: 32px;
-  height: 32px;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 #form-procurar {
   max-width: 100%;
 }
@@ -288,137 +289,36 @@ a.btn,
   }
 }
 
-.banner-div {
-  background: transparent linear-gradient(180deg, #00000099 0%, #54545400 100%)
-    0% 0% no-repeat padding-box;
-  width: 100%;
-  height: 100%;
+.link-primary {
+  color: var(--cor-primaria-normal) !important;
+  text-decoration: none;
 }
 
-.banner-div .banner-container {
-  height: 78vh;
+.link-secondary {
+  color: #73797d !important;
+  text-decoration: none;
 }
 
-.banner-div .fs-1,
-.banner-div .fs-2,
-.banner-div .fs-4 {
-  color: #fff;
+.link-primary:hover,
+.link-secondary:hover {
+  text-decoration: underline;
 }
 
-.banner {
-  background: url(../imgs/Mask\ Group\ 8.jpg) no-repeat center center;
-  background-size: cover;
-  height: 90vh;
-}
-
-.banner-role {
-  background: transparent linear-gradient(0deg, #00000099 0%, #54545400 100%);
-  display: block;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.banner-role .fa-arrow-circle-down,
-.banner-role span.fs-4 {
-  cursor: pointer;
-  color: #fff;
-  transition: all 0.25s ease-in;
-}
-
-.banner-role:hover .fa-arrow-circle-down,
-.banner-role:hover span.fs-4 {
-  transform: translateY(0.25rem);
-  color: var(--cor-primaria-normal);
-}
-
-.destaque-container {
-  position: relative;
-  width: 200px;
-  height: 280px;
-  margin: 0 auto;
-  cursor: pointer;
-}
-
-.destaque-container img {
-  width: 200px;
-  height: 280px;
-}
-
-.fa-search-plus {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font-size: 2.375rem;
-  color: transparent;
-  position: absolute;
-  z-index: 3;
-  transform: translate(94.5%, 7rem);
-  transition: all 0.3s ease-out;
-}
-
-.fa-search-plus:before {
-  display: inline-block;
-}
-
-.fa-search-plus:after {
-  content: "Ver mais";
-  display: block;
-  font-size: 1.25rem;
+.card-avaliacao#titulo-escolhido-avaliacao,
+.avaliacao-usuario {
   font-family: "IBM Plex Sans KR", sans-serif;
   font-weight: 600;
-  margin-top: 0.5rem;
-}
-
-.destaque-container:hover .fa-search-plus {
-  transform: translate(74.5%, 7rem);
-  color: var(--cor-primaria-clara);
-}
-
-.destaque-container::after {
-  content: " ";
-  width: 200px;
-  height: 280px;
-  background: rgba(0, 0, 0, 0);
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  z-index: 2;
-  transition: all 0.35s ease-out;
-}
-
-.destaque-container:hover::after {
-  content: " ";
-  background: rgba(0, 0, 0, 0.25);
-}
-
-.destaque-card + .destaque-card {
-  margin-bottom: 1rem;
-}
-
-.destaque-card .card-nome {
-  width: 100%;
-  margin: 0 auto;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  color: #fff;
-  font-family: "IBM Plex Sans KR", sans-serif;
-  font-weight: 600;
-  font-size: 1.5rem;
-  background: transparent
-    linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8) 80%) 0% 0%
-    no-repeat padding-box;
-}
-
-.destaque-card .card-avaliacao {
+  font-size: 1.625rem;
   color: #62d2a2;
-  font-family: "IBM Plex Sans KR", sans-serif;
-  font-weight: 600;
-  font-size: 1.25rem;
+  width: 100%;
+  text-align: center;
+}
+
+.card-estrelas,
+.comentario-usuario-estrelas {
+  background-color: #dee2e6;
+  border-radius: 8px;
+  text-align: center;
 }
 
 .card-estrelas {
@@ -429,6 +329,19 @@ a.btn,
 }
 
 .card-estrelas img {
+  max-width: 1.25rem !important;
+  max-height: 1.25rem !important;
+}
+
+.card-estrelas:not(.card-estrelas.comentario-usuario-estrelas
+    img, .card-estrelas.comentario-usuario-estrelas) {
+  margin: 0 auto;
+  max-width: 200px;
+  background-color: #dee2e6;
+  border-radius: 0 0 8px 8px;
+}
+
+.card-estrelas img:not(.card-estrelas.comentario-usuario-estrelas img) {
   max-width: 1.25rem !important;
   max-height: 1.25rem !important;
 }

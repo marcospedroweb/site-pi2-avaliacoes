@@ -54,6 +54,11 @@ span.fs-2 {
   font-size: 1rem !important;
 }
 
+.my-6 {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
 .mb-6 {
   margin-bottom: 4rem;
 }
@@ -142,6 +147,11 @@ a.btn,
   align-items: unset;
 }
 
+.sticky-top {
+  top: 1.5rem;
+  z-index: 999;
+}
+
 /* CSS NATIVO */
 .navbar .dropdown .btn,
 .footer-drop .dropdown .btn {
@@ -175,22 +185,6 @@ a.btn,
 
 .dropdown-item:not(.dropdown-titulo):active {
   background-color: var(--cor-primaria-clara) !important;
-}
-
-#usuario-background {
-  display: block;
-  border: 3px solid #ccc;
-  width: 32px;
-  height: 32px;
-}
-
-#usuario-img {
-  display: block;
-  max-width: 100%;
-  width: 32px;
-  height: 32px;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 #form-procurar {
@@ -286,51 +280,112 @@ a.btn,
     transition: all 0.5s ease-out;
     opacity: 100;
   }
+
+  #offcanvas-mobile {
+    display: none !important;
+  }
+
+  #offcanvas-desktop {
+    display: block !important;
+  }
+
+  .card-estrelas img {
+    max-width: 1.875rem !important;
+    max-height: 1.875rem !important;
+  }
 }
 
-.banner-div {
-  background: transparent linear-gradient(180deg, #00000099 0%, #54545400 100%)
-    0% 0% no-repeat padding-box;
-  width: 100%;
-  height: 100%;
-}
-
-.banner-div .banner-container {
-  height: 78vh;
-}
-
-.banner-div .fs-1,
-.banner-div .fs-2,
-.banner-div .fs-4 {
-  color: #fff;
-}
-
-.banner {
-  background: url(../imgs/Mask\ Group\ 8.jpg) no-repeat center center;
-  background-size: cover;
-  height: 90vh;
-}
-
-.banner-role {
-  background: transparent linear-gradient(0deg, #00000099 0%, #54545400 100%);
+#offcanvas-mobile {
   display: block;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
 }
 
-.banner-role .fa-arrow-circle-down,
-.banner-role span.fs-4 {
-  cursor: pointer;
+#offcanvas-desktop {
+  display: none;
+}
+
+#dropdownMenuLink img {
+  max-width: 2rem;
+  transition: all 0.35s ease-out;
+}
+
+#dropdownMenuLink img:hover {
   color: #fff;
-  transition: all 0.25s ease-in;
 }
 
-.banner-role:hover .fa-arrow-circle-down,
-.banner-role:hover span.fs-4 {
-  transform: translateY(0.25rem);
+.link-primary {
+  color: var(--cor-primaria-normal) !important;
+  text-decoration: none;
+}
+
+.link-secondary {
+  color: #212529 !important;
+  text-decoration: none;
+}
+
+.link-primary:hover,
+.link-secondary:hover {
+  text-decoration: underline;
+}
+
+.categorias-link {
   color: var(--cor-primaria-normal);
+  transition: color 0.35s ease-in;
+}
+
+.categorias-link.active::before {
+  content: ">";
+  padding: 0 0.25rem;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.categorias-link:hover {
+  color: var(--cor-primaria-escura);
+}
+
+.categorias-link:active {
+  color: var(--cor-primaria-clara);
+}
+
+.categorias-link.active {
+  box-shadow: 0 0 0 0.25rem var(--cor-primaria-clara) !important;
+}
+
+.ul-categorias li + li {
+  margin-top: 1rem !important;
+}
+
+.form-categoria input {
+  box-shadow: 0 16px 20px 0 rgba(0, 0, 0, 0.15) !important;
+}
+
+.inside-form-categoria {
+  position: relative;
+}
+
+#limitar-datalist {
+  max-height: 5rem;
+}
+
+.icon-procurar-categoria {
+  position: absolute;
+  top: calc(50% - 1.95rem);
+  right: calc(0% - 0.1rem);
+  color: var(--cor-primaria-clara);
+  cursor: pointer;
+  transition: all 0.35s ease-out;
+  padding: 0.45rem 1rem;
+  border-radius: 0 8px 8px 0;
+}
+
+.icon-procurar-categoria.focus {
+  color: #fff;
+  background-color: var(--cor-primaria-normal);
+}
+
+.icon-procurar-categoria:hover {
+  color: #fff;
+  background-color: var(--cor-primaria-normal);
 }
 
 .destaque-container {
