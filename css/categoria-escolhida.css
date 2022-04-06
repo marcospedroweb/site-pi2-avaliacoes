@@ -1,0 +1,356 @@
+.link-primary {
+  color: var(--cor-primaria-normal) !important;
+  text-decoration: none;
+}
+
+.link-secondary {
+  color: #73797d !important;
+  text-decoration: none;
+}
+
+.link-primary:hover,
+.link-secondary:hover {
+  text-decoration: underline;
+}
+
+.card-avaliacao#titulo-escolhido-avaliacao,
+.avaliacao-usuario {
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-weight: 600;
+  font-size: 1.625rem;
+  color: #62d2a2;
+  width: 100%;
+  text-align: center;
+}
+
+.comentario-usuario {
+  border: 1px solid rgba(56, 56, 56, 0.1);
+}
+
+.informacoes-titulo.card-estrelas,
+.comentario-usuario-estrelas {
+  background-color: #dee2e6;
+  border-radius: 8px !important;
+  text-align: center;
+}
+
+#informacoes-titulo p + p {
+  border-left: 1px solid #383838;
+  padding-left: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.card-estrelas img {
+  max-width: 1.5rem !important;
+  max-height: 1.5rem !important;
+}
+
+#div-comentario,
+#div-comentario-editar {
+  position: relative;
+}
+
+#comentar-textarea,
+#comentar-textarea-editar {
+  background-color: #ececec !important;
+  border: 1px solid #707070 !important;
+  transition: background-color 0.25s ease-in;
+}
+
+#comentar-textarea:focus,
+#comentar-textarea-editar {
+  background-color: #fff !important;
+}
+
+#span-comentario,
+#span-comentario-editar {
+  position: absolute;
+  right: 4%;
+  bottom: 0;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-size: 0.75rem;
+}
+
+.comentar-estrelas,
+#comentar-estrelas-editar {
+  background-color: #dee2e6;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.comentar-estrelas span img,
+#comentar-estrelas-editar span img {
+  max-height: 1.625rem;
+}
+
+.comentario-paragrafo {
+  display: block;
+  position: relative;
+  width: 98%;
+  word-wrap: break-word;
+}
+
+.btn-cancelar,
+#btn-cancelar-alert {
+  background: transparent;
+  font-weight: 600;
+  padding: 6px 16px;
+  transition: all 0.3s ease-out;
+}
+
+.btn-cancelar:focus,
+#btn-cancelar-alert:focus {
+  box-shadow: 0 0 0 0.25rem #ff6b70 !important;
+  background-color: #a3001e !important;
+  color: #fff !important;
+}
+
+.btn-cancelar:hover,
+#btn-cancelar-alert:hover {
+  background-color: #dc3545 !important;
+  color: #fff !important;
+}
+
+.btn-cancelar:active,
+#btn-cancelar-alert:active {
+  background-color: #ff6b70 !important;
+}
+
+.alert {
+  transform: background-color 0.1s ease-out;
+}
+
+.comentar {
+  height: 0;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+  transform: translateY(4rem);
+}
+
+.comentar.show {
+  transform: translateY(0);
+  height: inherit;
+  opacity: 100;
+}
+
+.comentar.show-cima {
+  transform: translateY(-4rem);
+  height: inherit;
+  opacity: 0;
+}
+
+.comentarios-dos-usuarios h4 {
+  font-weight: bold;
+  font-family: "Noto Sans", sans-serif, arial;
+}
+
+.comentario-usuario-estrelas img {
+  width: auto;
+  height: 1.25rem !important;
+}
+
+.card-estrelas {
+  margin: 0 auto;
+  max-width: 200px;
+  background-color: #dee2e6;
+  border-radius: 0 0 8px 8px;
+}
+
+.card-estrelas img {
+  max-width: 1.25rem !important;
+  max-height: 1.25rem !important;
+}
+
+.dropend {
+  display: inline-block;
+  width: fit-content;
+  right: 0.2rem;
+  top: 0.29rem;
+  padding: 0;
+  border-radius: 8px;
+  opacity: 100;
+  transition: all 0.25s ease-out;
+}
+
+.dropend button.dropdown-toggle {
+  box-shadow: 0 0 0 0 transparent !important;
+  color: #acb0b4;
+  transition: all 0.15s ease-out;
+}
+
+.dropend button.dropdown-toggle:active,
+.dropend button.dropdown-toggle:hover {
+  box-shadow: 0 0 0 0.25rem var(--cor-primaria-clara) !important;
+  color: var(--cor-primaria-clara);
+}
+
+.dropend .dropdown-toggle::after {
+  display: none;
+}
+
+.btn-editar-comentario,
+.btn-apagar-comentario {
+  color: #2c2c2c;
+  font-weight: bold;
+}
+
+.btn-editar-comentario:hover {
+  color: var(--cor-primaria-normal);
+}
+.btn-apagar-comentario:hover {
+  color: #dc3545;
+}
+
+.btn-editar-comentario::after {
+  content: "Editar";
+}
+
+.btn-apagar-comentario::after {
+  content: "Apagar";
+}
+
+#btn-editar-cancelar {
+  background-color: transparent !important;
+  box-shadow: 0 0 0 0.25rem transparent !important;
+  transition: all 0.25s ease-out;
+}
+
+#btn-editar-cancelar:hover {
+  background-color: #dc3545 !important;
+  color: #fff !important;
+}
+
+#btn-editar-cancelar:active {
+  background-color: #dc3545 !important;
+  box-shadow: 0 0 0 0.25rem #a3001e !important;
+  color: #fff !important;
+}
+
+#modal-apagar button[type="button"] {
+  box-shadow: 0 0 0 0.25rem transparent !important;
+  color: #2c2c2c;
+  transition: all 0.15s ease-out;
+}
+
+#modal-apagar button[type="button"]:hover {
+  box-shadow: 0 0 0 0.25rem #2c2c2c !important;
+}
+
+#modal-apagar button[type="submit"] {
+  box-shadow: 0 0 0 0.25rem transparent !important;
+  transition: all 0.15s ease-out;
+}
+
+#modal-apagar button[type="submit"]:hover {
+  box-shadow: 0 0 0 0.25rem #dc3545 !important;
+}
+
+#paginacao-categorias .page-item .page-link {
+  color: var(--cor-primaria-normal) !important;
+}
+
+#paginacao-categorias .page-item.active .page-link {
+  color: #fff !important;
+  background-color: var(--cor-primaria-normal) !important;
+  border-color: var(--cor-primaria-normal);
+}
+
+.destaque-container {
+  position: relative;
+  width: 200px;
+  height: 280px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.destaque-container img {
+  width: 200px;
+  height: 280px;
+}
+
+.fa-search-plus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 2.375rem;
+  color: transparent;
+  position: absolute;
+  z-index: 3;
+  transform: translate(94.5%, 7rem);
+  transition: all 0.3s ease-out;
+}
+
+.fa-search-plus:before {
+  display: inline-block;
+}
+
+.fa-search-plus:after {
+  content: "Ver mais";
+  display: block;
+  font-size: 1.25rem;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.destaque-container:hover .fa-search-plus {
+  transform: translate(74.5%, 7rem);
+  color: var(--cor-primaria-clara);
+}
+
+.destaque-container::after {
+  content: " ";
+  width: 200px;
+  height: 280px;
+  background: rgba(0, 0, 0, 0);
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  transition: all 0.35s ease-out;
+}
+
+.destaque-container:hover::after {
+  content: " ";
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.destaque-card + .destaque-card {
+  margin-bottom: 1rem;
+}
+
+.destaque-card .card-nome {
+  width: 100%;
+  margin: 0 auto;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #fff;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  background: transparent
+    linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8) 80%) 0% 0%
+    no-repeat padding-box;
+}
+
+.destaque-card .card-avaliacao {
+  color: #62d2a2;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.card-estrelas {
+  margin: 0 auto;
+  max-width: 200px;
+  background-color: #dee2e6;
+  border-radius: 0 0 8px 8px;
+}
+
+.card-estrelas img {
+  max-width: 1.25rem !important;
+  max-height: 1.25rem !important;
+}
