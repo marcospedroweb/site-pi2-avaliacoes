@@ -1,0 +1,44 @@
+.banner-div {
+  background: transparent linear-gradient(180deg, #00000099 0%, #54545400 100%)
+    0% 0% no-repeat padding-box;
+  width: 100%;
+  height: 100%;
+}
+
+.banner-div .banner-container {
+  height: 78vh;
+}
+
+.banner-div .fs-1,
+.banner-div .fs-2,
+.banner-div .fs-4 {
+  color: #fff;
+}
+
+.banner {
+  background: url(../imgs/Mask\ Group\ 8.jpg) no-repeat center center;
+  background-size: cover;
+  height: 90vh;
+}
+
+.banner-role {
+  background: transparent linear-gradient(0deg, #00000099 0%, #54545400 100%);
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.banner-role .fa-arrow-circle-down,
+.banner-role span.fs-4 {
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.25s ease-in;
+}
+
+.banner-role:hover .fa-arrow-circle-down,
+.banner-role:hover span.fs-4 {
+  transform: translateY(0.25rem);
+  color: var(--cor-primaria-normal);
+}
