@@ -1,0 +1,137 @@
+@media screen and (min-width: 992px) {
+  #div-logo-mobile {
+    width: unset;
+  }
+}
+
+#usuario-avatar {
+  transition: all 0.25 ease-out;
+}
+
+#background-editar-perfil {
+  background-color: var(--cor-primaria-escura);
+  margin: 4rem 0;
+  padding: 1.25rem;
+  border-radius: 8px;
+}
+
+#nova-img-div {
+  cursor: pointer;
+  width: 14rem;
+  height: 14rem;
+  background-color: #eee;
+  border: 5px solid var(--cor-primaria-normal);
+  border-radius: 50%;
+  transition: all 0.25s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+#nova-img-div::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 20rem;
+  height: 20rem;
+  background-color: rgba(0, 0, 0, 0);
+  transition: all 0.5s ease-in;
+}
+
+#nova-img-div::after {
+  content: "Alterar imagem";
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  position: absolute;
+  top: 45%;
+  left: 22%;
+  opacity: 0%;
+  transition: all 0.4s ease-in;
+}
+
+#nova-img-div:hover:after {
+  opacity: 100%;
+  transition: all 0.5s ease-in;
+}
+
+#nova-img-div:hover::before {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#nova-img-div:hover {
+  background-color: #eee !important;
+  border: 8px solid var(--cor-primaria-clara);
+}
+
+#avatar-posX,
+#avatar-posY {
+  position: absolute;
+  width: 14rem;
+  background-color: transparent;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+#avatar-posX::-webkit-slider-thumb,
+#avatar-posY::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  cursor: ew-resize;
+  background: var(--cor-primaria-clara);
+}
+
+#avatar-posX {
+  bottom: 0;
+  left: 13.5%;
+}
+
+#avatar-posY {
+  top: 35%;
+  left: -30%;
+  transform: rotate(90deg);
+}
+
+#mais-zoom,
+#menos-zoom {
+  font-size: 1.25rem;
+  position: absolute;
+  right: 2.5%;
+  padding: 8px;
+  background-color: var(--cor-primaria-normal);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease-out;
+}
+
+#mais-zoom:hover,
+#menos-zoom:hover {
+  background-color: #00b487;
+}
+
+#mais-zoom:active,
+#menos-zoom:active {
+  background-color: var(--cor-primaria-clara);
+}
+
+#mais-zoom {
+  top: 5%;
+}
+
+#menos-zoom {
+  bottom: 15%;
+}
+
+#btn-atualizar-perfil {
+  font-family: "IBM Plex Sans KR", sans-serif;
+  padding: 12px 32px !important;
+  background-color: var(--cor-primaria-normal);
+  color: #fff;
+  transition: all 0.25s ease-out;
+}
+
+#btn-atualizar-perfil:hover {
+  background-color: #00b487;
+  color: #fff;
+}

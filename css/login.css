@@ -1,0 +1,42 @@
+.container-form {
+  margin: 6rem 0;
+  height: 100%;
+}
+
+#form-conta {
+  background-color: var(--cor-primaria-escura);
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+#form-conta .fs-2,
+#form-conta .form-floating:nth-last-child(2) {
+  margin-bottom: 2rem;
+}
+
+#ou-linha {
+  margin: 2rem 0;
+  position: relative;
+}
+
+#ou-linha:before {
+  content: "";
+  width: 11.375rem;
+  height: 3px;
+  background-color: #707070;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 13.375rem);
+}
+
+#ou-linha:after {
+  content: "";
+  width: 11.375rem;
+  height: 3px;
+  background-color: #707070;
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: calc(50% - 13.375rem);
+}
