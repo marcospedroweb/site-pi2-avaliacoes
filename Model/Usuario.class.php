@@ -9,7 +9,7 @@ class Usuario extends Model
     $this->tabela = 'usuario';
   }
 
-  public function criar(array $dados): bool
+  function criar(array $dados): array
   {
     // Criar conta para usuario
     //Variaveis utilizadaas
@@ -30,10 +30,10 @@ class Usuario extends Model
             FROM usuario
             WHERE email = :email";
     //Executando o select
-    $select = $this->conn->prepare($sql);
+    $select = $this->prepare($sql);
     $select->execute([':email' => $email]);
     $select->fetchAll();
-    // $select = sqlsrv_query($this->conn, $sql, $registroUsuario);
+    // $select = sqlsrv_query($this, $sql, $registroUsuario);
     if ($select[0]['email'])
       return array(false, 'Esse endereço de email está indisponível, tente outro.');
 
@@ -53,7 +53,7 @@ class Usuario extends Model
       ':zoom' => 'cover'
     );
     //Executando o insert
-    $insert = $this->conn->prepare($sql);
+    $insert = $this->prepare($sql);
     $insert->execute($registroUsuario);
     //Verificando se o insert deu certo
     if (!($insert))
@@ -63,7 +63,7 @@ class Usuario extends Model
     $sql = "SELECT id 
             FROM usuario 
             WHERE email = :email";
-    $select = $this->conn->prepare($sql);
+    $select = $this->prepare($sql);
     $select->execute([':email' => $email]);
     $registro = $select->fetchAll();
 
@@ -82,61 +82,7 @@ class Usuario extends Model
     return array(true);
   }
 
-  function login($postLogin)
-  {
-    // Entrar em um conta existente do usuario
-    //Variaveis utilizadas
-    $email = $postLogin['email'] ?? '';
-    $senhaUsuario = $postLogin['senha'] ?? '';
-
-    //Recuperando o registro com email do usuario
-    $sql = "SELECT 
-              id, nome, senha, avatar, posX, posY, zoom
-            FROM usuario 
-            WHERE email = :email";
-    $select = $this->conn->prepare($sql);
-    $select->execute([':email' => $email]); //Executa a consulta, comparando com o email passado
-    $registro = $select->fetchAll(); //Retorna o usuario compativel com o email
-    //Verificando há usuario com aquele email
-    if (!($registro[0]['email']))
-      return array(false, 'Email e/ou senha inválidos'); //Se NÃO der certo, retorna false e não executa o que está abaixo
-
-    //Verificando se a senha passada pelo usuario é igual a senha da conta armazenada no banco
-    if (!(password_verify($senhaUsuario, $registro[0]['senha']))) {
-      // (password_verify) verifica se a senha passado pelo usuario é compativel com a senha criptografada guardada
-      return array(false, 'Email e/ou senha inválidos'); //Se NÃO der certo, retorna false e não executa o que está abaixo
-    }
-
-    //Se a senha for compativel com a do email, adiciona os dados no $_SESSION
-    //$_SESSION;Usado para armazenar dados
-    $_SESSION['nome'] = $registro[0]['nome'];
-    $_SESSION['id'] = $registro[0]['id'];
-    $_SESSION['avatar'] = $registro[0]['avatar'];
-    $_SESSION['posX'] = $registro[0]['posX'];
-    $_SESSION['posY'] = $registro[0]['posY'];
-    $_SESSION['zoom'] = $registro[0]['zoom'];
-
-    return array(true);
-  }
-
-  function mostrarConta($idUsuario)
-  {
-    // Mostra todas as informações da conta
-    $idUsuario = $idUsuario ?? '';
-    if (!($idUsuario))
-      return array(false, 'Não há usuario registrado');
-
-    $sql = "SELECT 
-              id, nome, email, senha, avatar, posX, posY, zoom
-            FROM usuario
-            WHERE id = :id";
-    $select = $this->conn->prepare($sql);
-    $select->execute([':id' => $idUsuario]);
-    $registro = $select->fetchAll();
-
-    return $registro[0]['id'] ?? array(false, 'Usuario não encontrado');
-  }
-  public function atualizar(array $dados): bool
+  public function atualizar(array $dados): array
   {
     // Edita dados da conta do usuario
 
@@ -162,7 +108,7 @@ class Usuario extends Model
     $sql = "SELECT id, senha, avatar
             FROM usuario
             WHERE id = :id";
-    $select = $this->conn->prepare($sql);
+    $select = $this->prepare($sql);
     $select->execute([':id' => $idUsuario]);
     $registroConta = $select->fetchAll();
     //Verificando se a senha é compativel a da conta sendo editada
@@ -228,7 +174,7 @@ class Usuario extends Model
       ':zoom' => $novoZoom,
       ':id' => $idUsuario
     );
-    $select = $this->conn->prepare($sql);
+    $select = $this->prepare($sql);
     $resultSelect = $select->execute($registroUsuario);
     //Verificando se o update deu certo
     if ($resultSelect) {
@@ -243,12 +189,12 @@ class Usuario extends Model
       return array(false, 'Houve um erro ao atualizar os dados, tente novamente.');
   }
 
-  function apagar(array $dados): bool
+  function apagar(array $dados): array
   {
     return array('resultado');
   }
 
-  function listar(array $dados): bool
+  function listar(array $dados): array
   {
     return array('resultado');
   }
@@ -265,7 +211,7 @@ class Usuario extends Model
               id, nome, senha, avatar, posX, posY, zoom
             FROM usuario 
             WHERE email = :email";
-    $select = $this->conn->prepare($sql);
+    $select = $this->prepare($sql);
     $select->execute([':email' => $email]); //Executa a consulta, comparando com o email passado
     $registro = $select->fetchAll(); //Retorna o usuario compativel com o email
     //Verificando há usuario com aquele email
@@ -301,7 +247,7 @@ class Usuario extends Model
               id, nome, email, senha, avatar, posX, posY, zoom
             FROM usuario
             WHERE id = :id";
-    $select = $this->conn->prepare($sql);
+    $select = $this->prepare($sql);
     $select->execute([':id' => $idUsuario]);
     $registro = $select->fetchAll();
 
