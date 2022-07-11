@@ -160,20 +160,21 @@ class Avaliacao extends Model
     $comentario_id = $dados['comentario_id'] ?? '';
     $titulo_id = $dados['titulo_id'] ?? '';
     $comentario_usuario_id = $dados['usuario_id'] ?? '';
-    $idSessao = $_SESSION['id'] ?? '';
+    $sessao_id = $_SESSION['id'] ?? '';
 
     //Verifica se os valores passados são iguais no banco
-    if (!(($comentario_usuario_id === $idSessao) || $idSessao === 3))
+    if (!(($comentario_usuario_id === $sessao_id) || $sessao_id === 3))
       return array(false, 'Houve um erro ao apagar o comentaria.'); //Se NÃO der certo, retorna false e não executa o que está abaixo
 
     //Verificando se é o admin apagando o comentario
-    if ($idSessao === 3) {
+    if ($sessao_id === 3) {
       $sql = "SELECT usuario
               FROM avaliacao
-              WHERE id = :";
-      $select = sqlsrv_query($this->conn, $sql, array($comentario_id));
-      $avaliacao = sqlsrv_fetch_array($select, SQLSRV_FETCH_ASSOC);
-      if (!($select))
+              WHERE id = :id";
+      $select = $this->prepare($sql);
+      $resultado = $select->execute([':id' => $comentario_id]);
+      $avaliacao = $select->fetchAll()[0];
+      if (!($resultado))
         return array(false, 'Houve um erro ao apagar o comentaria.');
 
       $comentario_usuario_id = $avaliacao['usuario'];
@@ -181,23 +182,28 @@ class Avaliacao extends Model
 
     //Se for igual, faz o delete daquela opnião
     $sql = "DELETE FROM avaliacao 
-            WHERE id = ? 
-              and titulo = ?
-              and usuario = :";
+            WHERE id = :id 
+              and titulo = :titulo_id
+              and usuario = :usuario_id";
     //Passando os valores para executar o sql
-    $registroUsuario = array($comentario_id, $titulo_id, $comentario_usuario_id);
-    $registroAval = sqlsrv_query($this->conn, $sql, $registroUsuario);
-    //Verificando se o delete deu certo
-    if (!($registroAval))
+    $delete = $this->prepare($sql);
+    $resultado = $delete->execute([
+      ':id' => $comentario_id,
+      ':titulo_id' => $titulo_id,
+      ':usuario_id' => $comentario_usuario_id
+    ]);
+
+    if (!($resultado))
       return array(false, "Houve um erro ao apagar o comentario, tente novamente.");; //Se NÃO der certo, retorna false e não executa o que está abaixo
 
     //Atualizando a nota daquele titulo
-    $success = (new Categoria($this->conn))->atualizarAvaliacaoTitulo(array($titulo_id));
+    $success = $this->atualizarAvaliacaoTitulo(array($titulo_id));
     if ($success || $success === NULL)
       return array(true, "Comentario apagado com sucesso!");
     else
-      return array(false, "Houve um erro ao apagar o comentario, tente novamente."); //Se NÃO der certo, retorna false e não executa o que está abaixo*/
+      return array(false, "Houve um erro ao atualizar o comentario, tente novamente."); //Se NÃO der certo, retorna false e não executa o que está abaixo*/
   }
+
   public function listar(array $dados): array
   {
     //Retorna todos os dados de cada comentario
@@ -229,18 +235,17 @@ class Avaliacao extends Model
             INNER JOIN 
               categoria c ON c.id = t.categoria
             WHERE 
-              t.id = ?
+              t.id = :titulo_id
             ORDER BY avaliacao desc, dataPublicado desc
             OFFSET {$paginaAtual} ROWS
             FETCH NEXT {$proximasLinhas} ROWS ONLY";
 
-    $registroUsuario = array($titulo_id);
-    $select = sqlsrv_query($this->conn, $sql, $registroUsuario);
+    $select = $this->prepare($sql);
+    $resultado = $select->execute([':titulo_id' => $titulo_id]);
 
     //Se o select trazer algum comentario, guarda-os em um array
-    if ($select)
-      while ($registro = sqlsrv_fetch_array($select, SQLSRV_FETCH_ASSOC))
-        $comentarios[$registro[0]['id']] = $registro;
+    if ($resultado)
+      $comentarios = $select->fetchAll();
 
     return $comentarios ?? '';
   }
@@ -260,23 +265,30 @@ class Avaliacao extends Model
     $sql = "SELECT ROUND(AVG(a.avaliacao), 1) as 'media titulo'
             FROM avaliacao a
             INNER JOIN titulo t ON a.titulo = t.id
-            WHERE t.id = ? 
-              or t.nome = ?";
-    $registrosUsuario = array($titulo_id, $titulo_nome);
-    $registroAval = sqlsrv_query($this->conn, $sql, $registrosUsuario);
-    $registroAval = sqlsrv_fetch_array($registroAval, SQLSRV_FETCH_ASSOC);
-    if ($registroAval['media titulo'] === NULL)
-      $registroAval['media titulo'] = 0;
+            WHERE t.id = :titulo_id
+              or t.nome = :titulo_nome";
+    $select = $this->prepare($sql);
+    $select->execute([
+      ':titulo_id' => $titulo_id,
+      ':titulo_nome' => $titulo_nome
+    ]);
+    $avaliacoes = $select->fetchAll()[0];
+    if ($avaliacoes['media titulo'] === NULL)
+      $avaliacoes['media titulo'] = 0;
 
     //Update da nota do titulo
     $sql = "UPDATE titulo 
-            SET avaliacaoGeral = ?
-            WHERE id = ? 
-              or nome = ?";
+            SET nota = :nota
+            WHERE id = :titulo_id 
+              or nome = :titulo_nome";
     //Passando os valores para executar o sql
-    $registrosUsuario = array($registroAval['media titulo'], $titulo_id, $titulo_nome);
-    $registroAval = sqlsrv_query($this->conn, $sql, $registrosUsuario);
-    if ($registroAval)
+    $update = $this->prepare($sql);
+    $resultado = $update->execute([
+      ':nota' => $avaliacoes['media titulo'],
+      ':titulo_id' => $titulo_id,
+      ':titulo_nome' => $titulo_nome
+    ]);
+    if ($resultado)
       return true;
   }
 
@@ -290,12 +302,13 @@ class Avaliacao extends Model
 
     $sql = "SELECT count(*) as 'qtdComentarios'
             FROM avaliacao
-            WHERE titulo = :";
-    $select = sqlsrv_query($this->conn, $sql, array($titulo_id));
-    if (!($select))
+            WHERE titulo_id = :titulo_id";
+    $select = $this->prepare($sql);
+    $resultado = $select->execute(['titulo_id' => $titulo_id]);
+    if (!($resultado))
       return array(false, 'Houve um erro ao buscar a quantidade de comentarios.');
 
-    $avaliacao = sqlsrv_fetch_array($select, SQLSRV_FETCH_ASSOC);
+    $avaliacao = $select->fetchAll()[0];
 
     return array(true, $avaliacao['qtdComentarios']);
   }
