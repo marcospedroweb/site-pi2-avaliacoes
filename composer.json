@@ -1,0 +1,19 @@
+{
+  "name": "gomy/tsi-avalifind-pi2",
+  "description": "avalifind",
+  "authors": [
+    {
+      "name": "Marcos",
+      "email": "king.frontweb@outlook.com"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "files": [
+      "app/router/router.php"
+    ],
+    "psr-4": {
+      "app\\": "app"
+    }
+  }
+}
