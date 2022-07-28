@@ -1,4 +1,8 @@
+<h5>Minha pagina index</h5>
+
+
 <?php
+/*
 ini_set('display_errors', 1);
 
 ini_set('display_startup_errors', 1);
@@ -34,3 +38,4 @@ include('./telas/style-home.php'); //css e js
 include('./telas/frag-navbar.php'); //navegação principal do site
 include('./telas/tela-inicio.php'); // tela da pagina inicial
 include('./telas/frag-footer.php'); // footer
+*/

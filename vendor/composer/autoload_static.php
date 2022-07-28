@@ -8,8 +8,11 @@ class ComposerStaticInit85ecf2772d21671e4052e0aad0d00772
 {
     public static $files = array (
         '97327a360a019aef6c5eb77040e50afb' => __DIR__ . '/../..' . '/app/helpers/constants.php',
+        '6223be9ccf7f5aa65eb76133d4a6c7c7' => __DIR__ . '/../..' . '/app/helpers/redirect.php',
         '46bb0bfabef0eb65e285e67dfa001295' => __DIR__ . '/../..' . '/app/router/router.php',
         'ff8eb33fa35dd77dc422198d0eae994c' => __DIR__ . '/../..' . '/app/core/controller.php',
+        '264a786b23bf46be20caff46c64d291c' => __DIR__ . '/../..' . '/app/database/connect.php',
+        '3626d367c64e8eae583306f6ec554d30' => __DIR__ . '/../..' . '/app/database/fetch.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -28,6 +31,7 @@ class ComposerStaticInit85ecf2772d21671e4052e0aad0d00772
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'app\\controllers\\Home' => __DIR__ . '/../..' . '/app/controllers/Home.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

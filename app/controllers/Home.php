@@ -6,6 +6,10 @@ class Home
 {
   public function index($params)
   {
-    var_dump('Home');
+    $users = all('usuario');
+    return [
+      'view' => 'home.php',
+      'data' => ['title' => 'Home', 'users' => $users]
+    ];
   }
 }

@@ -2,7 +2,8 @@
 
 function controller($matchedUri, $params)
 {
-  //Essa função é responsavel por o sistema funcionar
+  //Essa função é responsavel por o sistema funcionar, recebendo pela rota qual controller devera ser usado e qual metodo
+
   [$controller, $method] = explode('@', array_values($matchedUri)[0]); //Retorna qual "metodo" devera ser instanciado pelo controller
   // [$controller, $method], atribui os valores retornados as variaveis respectivamente, nesse caso 2 variaveis, 2 retornos
   $controllerWithNameSpace = CONTROLLER_PATH . $controller;
@@ -19,5 +20,5 @@ function controller($matchedUri, $params)
     //Se o metodo NÃO existir, joga um erro na tela
     throw new Exception("Esse metodo {$method} não existe no controller {$controller}");
 
-  $controllerInstance->$method($params);
+  return $controllerInstance->$method($params); //Retornando um array para o router e depois index.php
 }

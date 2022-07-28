@@ -75,9 +75,8 @@ function router()
 
   if (!empty($matchedUri)) {
     //Se encontrar a rota compativel, inicia o metodo para retornar a pagina
-    controller($matchedUri, $params);
-    return;
+    return controller($matchedUri, $params);
   }
 
-  throw new Exception('Algo deu errado'); //Se ocorrer algo de errado, joga um erro na tela
+  throw new Exception('PAGE 404, pagina não encontrada'); //Se ocorrer algo de errado, joga um erro na tela
 }
