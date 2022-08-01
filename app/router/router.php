@@ -49,7 +49,9 @@ function paramsFormat($uri, $params)
   $paramsData = [];
   foreach ($params as $index => $param)
     //Retorna um array com index de acordo com seu valor
-    $paramsData[$uri[$index - 1]] = $param;
+    $paramsData[$uri[$index === 0 ? $index : $index - 1]] = $param;
+
+  return $paramsData;
 }
 
 function router()
@@ -65,7 +67,7 @@ function router()
   if (empty($matchedUri)) {
     //Se não encontrar a rota, vai procurar pelo regex no uri
     $matchedUri = regularExpressionMatchArrayRoutes($uri, $routes);
-    $uri = explode('/', ltrim($uri));
+    $uri = explode('/', ltrim($uri, '/'));
     //Caso seja uma uri dinamica e eu queira os parametros nela, utilizo o função params
     //Retorna os parametros da uri Regex, com os index de acordo com o explode
     $params = params($uri, $matchedUri);

@@ -3,7 +3,9 @@ let btnAvaliarTitulo = document.querySelector('#avaliar-categoria'); // Btn aval
 let sectionComentarios = document.querySelector('#comentarios');
 let formComentar = document.querySelector('.comentar'); // formulario do comentar
 let sectionJaAssistiu = document.querySelector('.ja-assistiu'); // alert
-let btnCancelarComentario = document.querySelector('#comentar-buttons .btn-cancelar'); // btn cancelar formulario
+let btnCancelarComentario = document.querySelector(
+  '#comentar-buttons .btn-cancelar',
+); // btn cancelar formulario
 let btnComentar = document.querySelector('#comentar'); // btn comentar formulario
 let btnSeLogar = document.querySelector('.alert#alert-deixe-nota .btn-primary');
 
@@ -11,19 +13,22 @@ function iniciarComentario(scroll) {
   if (scroll) {
     //Scrola até a sessão comentarios e faz aparecer o text area
     scrollToPosition(sectionComentarios.offsetTop - 80);
-    if (variaveisPHP['usuarioJaComentou'] === '1' || variaveisPHP['id'] === 'NaN')
+    if (
+      variaveisPHP['usuarioJaComentou'] === '1' ||
+      variaveisPHP['id'] === 'NaN'
+    )
       avisarParaSeLogar();
     else
       setTimeout(function () {
         if (formComentar.classList.contains('d-none')) {
           setTimeout(function () {
             sectionJaAssistiu.classList.toggle('d-none');
-          }, 100)
+          }, 100);
           setTimeout(function () {
             formComentar.classList.remove('show-cima');
             formComentar.classList.add('show');
-          }, 200)
-          formComentar.classList.toggle('d-none')
+          }, 200);
+          formComentar.classList.toggle('d-none');
         }
       }, 200);
   } else {
@@ -31,12 +36,12 @@ function iniciarComentario(scroll) {
     if (formComentar.classList.contains('d-none')) {
       setTimeout(function () {
         sectionJaAssistiu.classList.toggle('d-none');
-      }, 100)
+      }, 100);
       setTimeout(function () {
         formComentar.classList.remove('show-cima');
         formComentar.classList.add('show');
-      }, 200)
-      formComentar.classList.toggle('d-none')
+      }, 200);
+      formComentar.classList.toggle('d-none');
     }
   }
 }
@@ -63,7 +68,7 @@ function avisarParaSeLogar(eventForm) {
         btnSeLogar.classList.toggle('d-none');
       }
     }
-    alertNota.classList.toggle('d-none')
+    alertNota.classList.toggle('d-none');
     setTimeout(function () {
       alertNota.classList.add('alert-warning');
       alertNota.classList.remove('alert-danger');
@@ -101,64 +106,35 @@ function formatarTimeStamp(tempoUsuario) {
   */
 
   if (tempoUsuario < segundo) {
-
     return `${tempoUsuario} milesimos atrás`;
-
   } else if (tempoUsuario < minuto) {
-
     let seg = parseInt(tempoUsuario / segundo);
-    if (seg === 1)
-      return `${seg} segundo atrás`;
-    else
-      return `${seg} segundos atrás`;
-
+    if (seg === 1) return `${seg} segundo atrás`;
+    else return `${seg} segundos atrás`;
   } else if (tempoUsuario < hora) {
-
     let min = parseInt(tempoUsuario / minuto);
-    if (min === 1)
-      return `${min} minuto atrás`
-    else
-      return `${min} minutos atrás`;
-
+    if (min === 1) return `${min} minuto atrás`;
+    else return `${min} minutos atrás`;
   } else if (tempoUsuario < dia) {
-
     let horas = parseInt(tempoUsuario / hora);
-    if (horas === 1)
-      return `${horas} hora atrás`;
-    else
-      return `${horas} horas atrás`;
-
+    if (horas === 1) return `${horas} hora atrás`;
+    else return `${horas} horas atrás`;
   } else if (tempoUsuario < semana) {
-
     let dias = parseInt(tempoUsuario / dia);
-    if (dias === 1)
-      return `${dias} dia atrás`;
-    else
-      return `${dias} dias atrás`;
-
+    if (dias === 1) return `${dias} dia atrás`;
+    else return `${dias} dias atrás`;
   } else if (tempoUsuario < mes) {
-
     let semanas = parseInt(tempoUsuario / semana);
-    if (semanas === 1)
-      return `${semanas} semana atrás`;
-    else
-      return `${semanas} semanas atrás`;
-
+    if (semanas === 1) return `${semanas} semana atrás`;
+    else return `${semanas} semanas atrás`;
   } else if (tempoUsuario < ano) {
-
     let meses = parseInt(tempoUsuario / mes);
-    if (meses === 1)
-      return `${meses} mes atrás`;
-    else
-      return `${meses} meses atrás`;
-
+    if (meses === 1) return `${meses} mes atrás`;
+    else return `${meses} meses atrás`;
   } else {
     let anos = parseInt(tempoUsuario / ano);
-    if (anos === 1)
-      return `${anos} ano atrás`;
-    else
-      return `${anos} anos atrás`;
-
+    if (anos === 1) return `${anos} ano atrás`;
+    else return `${anos} anos atrás`;
   }
 }
 
@@ -167,7 +143,7 @@ if ($_GET['comentar']) {
   iniciarComentario(true);
 }
 
-categoriaTitulo.textContent = (categoriaTitulo.textContent).replace('s', ''); // Remove o 's' de categoria do titulo
+categoriaTitulo.textContent = categoriaTitulo.textContent.replace('s', ''); // Remove o 's' de categoria do titulo
 
 btnAvaliarTitulo.addEventListener('click', function (e) {
   // Começa o comentario, no click do botão ao lado do titulo, com scroll
@@ -177,14 +153,14 @@ btnAvaliarTitulo.addEventListener('click', function (e) {
 
 //btn da sessão Ja assistiu
 sectionJaAssistiu.addEventListener('click', function (e) {
-  if (variaveisPHP['usuarioJaComentou'] === '1')
-    avisarParaSeLogar();
-  else if ((e.target === sectionJaAssistiu.querySelector('button')) && variaveisPHP['id'] !== 'NaN')
+  if (variaveisPHP['usuarioJaComentou'] === '1') avisarParaSeLogar();
+  else if (
+    e.target === sectionJaAssistiu.querySelector('button') &&
+    variaveisPHP['id'] !== 'NaN'
+  )
     // Começa o comentario, no click do botão ao lado do titulo, com scroll
     iniciarComentario(false);
-  else
-    avisarParaSeLogar();
-
+  else avisarParaSeLogar();
 });
 
 //alert que aparece depois de clicar em cancelar o comentario
@@ -195,7 +171,7 @@ btnCancelarComentario.addEventListener('click', function () {
   let btnAlertNao = document.querySelector('#btn-voltar-alert');
 
   if (alert.classList.contains('d-none')) {
-    alert.classList.toggle('d-none')
+    alert.classList.toggle('d-none');
     setTimeout(function () {
       alert.classList.add('alert-warning');
       alert.classList.remove('alert-danger');
@@ -204,8 +180,8 @@ btnCancelarComentario.addEventListener('click', function () {
       if (e.target === btnAlertSim) {
         //Btn do confirmar o "cancelar comentario"
         //Se sim, esconde o textarea e volta a sessão Ja assistiu
-        if (!(formComentar.classList.contains('d-none'))) {
-          if (!(alert.classList.contains('d-none'))) {
+        if (!formComentar.classList.contains('d-none')) {
+          if (!alert.classList.contains('d-none')) {
             alert.classList.toggle('d-none');
             alert.classList.add('alert-danger');
             alert.classList.remove('alert-warning');
@@ -220,14 +196,14 @@ btnCancelarComentario.addEventListener('click', function () {
           formComentar.classList.remove('show');
           formComentar.classList.add('show-cima');
           setTimeout(function () {
-            if (!(formComentar.classList.contains('d-none'))) {
+            if (!formComentar.classList.contains('d-none')) {
               formComentar.classList.toggle('d-none');
               formComentar.classList.remove('show-cima');
             }
           }, 300);
 
-          if (!(alertNota.classList.contains('d-none'))) {
-            alertNota.classList.toggle('d-none')
+          if (!alertNota.classList.contains('d-none')) {
+            alertNota.classList.toggle('d-none');
             setTimeout(function () {
               alertNota.classList.add('alert-danger');
               alertNota.classList.remove('alert-warning');
@@ -236,15 +212,16 @@ btnCancelarComentario.addEventListener('click', function () {
           avalUser.textContent = 'N/A';
           avalUser.style.color = fragEstrelas.cinza[0];
           for (let i = 0; i <= 9; i++)
-            if (i % 2 === 0 || i === 0) //numero impar com nota (lado direito)
+            if (i % 2 === 0 || i === 0)
+              //numero impar com nota (lado direito)
               estrelasImg[i].setAttribute('src', fragEstrelas.cinza[1]);
-            else //numero par com nota (lado direito)
-              estrelasImg[i].setAttribute('src', fragEstrelas.cinza[2]);
+            //numero par com nota (lado direito)
+            else estrelasImg[i].setAttribute('src', fragEstrelas.cinza[2]);
         }
       } else if (e.target === btnAlertNao) {
         //Btn do confirmar o "cancelar comentario"
         //Se não, apenas esconde novamente o alert
-        if (!(alert.classList.contains('d-none'))) {
+        if (!alert.classList.contains('d-none')) {
           alert.classList.toggle('d-none');
           alert.classList.add('alert-danger');
           alert.classList.remove('alert-warning');
@@ -252,9 +229,7 @@ btnCancelarComentario.addEventListener('click', function () {
       }
     });
   }
-
 });
-
 
 //Formatão das estrelas da sessão Comentar
 let estrelasComentario = document.querySelector('.comentar-estrelas');
@@ -265,7 +240,7 @@ let spanComentar = document.querySelector('#span-comentario');
 
 window.onload = function () {
   avalUser.style.color = fragEstrelas.cinza[0];
-}
+};
 
 //Verifica se o usuario deixou a nota ou se está em uma conta
 formComentar.addEventListener('submit', function (eventForm) {
@@ -274,165 +249,208 @@ formComentar.addEventListener('submit', function (eventForm) {
 });
 
 comentarTextarea.addEventListener('input', function () {
-  if (variaveisPHP['id'] === 'NaN')
-    avisarParaSeLogar();
+  if (variaveisPHP['id'] === 'NaN') avisarParaSeLogar();
   else {
-    if ((comentarTextarea.value).length < 1200) {
-      spanComentar.textContent = `${(comentarTextarea.value).length} / 1200`;
-      spanComentar.style.color = "#212529";
+    if (comentarTextarea.value.length < 1200) {
+      spanComentar.textContent = `${comentarTextarea.value.length} / 1200`;
+      spanComentar.style.color = '#212529';
     } else {
-      spanComentar.textContent = `${(comentarTextarea.value).length} / 1200`;
+      spanComentar.textContent = `${comentarTextarea.value.length} / 1200`;
       spanComentar.style.color = fragEstrelas.vermelho[0];
     }
   }
 });
 
-
 // Formatação das estrelas do comentar
-function atualizarEstrelas(eventTarget, estrelas, avalSpan, inputComentario, atualizarEditarComentario, avaliacaoTexto) {
-  if (eventTarget === estrelas[9] || (atualizarEditarComentario && avaliacaoTexto.textContent === '5')) {
+function atualizarEstrelas(
+  eventTarget,
+  estrelas,
+  avalSpan,
+  inputComentario,
+  atualizarEditarComentario,
+  avaliacaoTexto,
+) {
+  if (
+    eventTarget === estrelas[9] ||
+    (atualizarEditarComentario && avaliacaoTexto.textContent === '5')
+  ) {
     avalSpan.textContent = 5;
     inputComentario.value = 5;
     avalSpan.style.color = fragEstrelas.verde[0];
     for (let i = 0; i <= 9; i++)
-      if (i % 2 === 0 || i === 0) //numero impar com nota (lado direito)
+      if (i % 2 === 0 || i === 0)
+        //numero impar com nota (lado direito)
         estrelas[i].setAttribute('src', fragEstrelas.verde[1]);
-      else //numero par com nota (lado direito)
-        estrelas[i].setAttribute('src', fragEstrelas.verde[2]);
-
-  } else if (eventTarget === estrelas[8] || (atualizarEditarComentario && avaliacaoTexto.textContent === '4.5')) {
-
+      //numero par com nota (lado direito)
+      else estrelas[i].setAttribute('src', fragEstrelas.verde[2]);
+  } else if (
+    eventTarget === estrelas[8] ||
+    (atualizarEditarComentario && avaliacaoTexto.textContent === '4.5')
+  ) {
     avalSpan.textContent = 4.5;
     inputComentario.value = 4.5;
     avalSpan.style.color = fragEstrelas.verde[0];
     for (let i = 0; i <= 9; i++)
-      if (i % 2 === 0 || i === 0) //numero impar com nota (lado direito)
+      if (i % 2 === 0 || i === 0)
+        //numero impar com nota (lado direito)
         estrelas[i].setAttribute('src', fragEstrelas.verde[1]);
-      else if (i === 9) // Ultimo lado direito
+      else if (i === 9)
+        // Ultimo lado direito
         estrelas[i].setAttribute('src', fragEstrelas.cinza[2]);
-      else //numero par com nota (lado direito)
-        estrelas[i].setAttribute('src', fragEstrelas.verde[2]);
-
-  } else if (eventTarget === estrelas[7] || (atualizarEditarComentario && avaliacaoTexto.textContent === '4')) {
-
+      //numero par com nota (lado direito)
+      else estrelas[i].setAttribute('src', fragEstrelas.verde[2]);
+  } else if (
+    eventTarget === estrelas[7] ||
+    (atualizarEditarComentario && avaliacaoTexto.textContent === '4')
+  ) {
     avalSpan.textContent = 4;
     inputComentario.value = 4;
     avalSpan.style.color = fragEstrelas.verde[0];
     for (let i = 0; i <= 9; i++)
-      if ((i % 2 === 0 || i === 0) && i < 8) //numero impar com nota (lado direito)
+      if ((i % 2 === 0 || i === 0) && i < 8)
+        //numero impar com nota (lado direito)
         estrelas[i].setAttribute('src', fragEstrelas.verde[1]);
-      else if (i >= 8 && i % 2 === 0) // numero impar cinza (lado esquerdo)
+      else if (i >= 8 && i % 2 === 0)
+        // numero impar cinza (lado esquerdo)
         estrelas[i].setAttribute('src', fragEstrelas.cinza[1]);
-      else if (i >= 8 && i % 2 !== 0) // numero par cinza (lado direito)
+      else if (i >= 8 && i % 2 !== 0)
+        // numero par cinza (lado direito)
         estrelas[i].setAttribute('src', fragEstrelas.cinza[2]);
-      else //numero par com nota (lado direito)
-        estrelas[i].setAttribute('src', fragEstrelas.verde[2]);
-
-  } else if (eventTarget === estrelas[6] || (atualizarEditarComentario && avaliacaoTexto.textContent === '3.5')) {
-
+      //numero par com nota (lado direito)
+      else estrelas[i].setAttribute('src', fragEstrelas.verde[2]);
+  } else if (
+    eventTarget === estrelas[6] ||
+    (atualizarEditarComentario && avaliacaoTexto.textContent === '3.5')
+  ) {
     avalSpan.textContent = 3.5;
     inputComentario.value = 3.5;
     avalSpan.style.color = fragEstrelas.amarelo[0];
     for (let i = 0; i <= 9; i++)
-      if ((i % 2 === 0 || i === 0) && i < 7) //numero impar com nota (lado direito)
+      if ((i % 2 === 0 || i === 0) && i < 7)
+        //numero impar com nota (lado direito)
         estrelas[i].setAttribute('src', fragEstrelas.amarelo[1]);
-      else if (i >= 7 && i % 2 === 0) // numero impar cinza (lado esquerdo)
+      else if (i >= 7 && i % 2 === 0)
+        // numero impar cinza (lado esquerdo)
         estrelas[i].setAttribute('src', fragEstrelas.cinza[1]);
-      else if (i >= 7 && i % 2 !== 0) // numero par cinza (lado direito)
+      else if (i >= 7 && i % 2 !== 0)
+        // numero par cinza (lado direito)
         estrelas[i].setAttribute('src', fragEstrelas.cinza[2]);
-      else //numero par com nota (lado direito)
-        estrelas[i].setAttribute('src', fragEstrelas.amarelo[2]);
-
-  } else if (eventTarget === estrelas[5] || (atualizarEditarComentario && avaliacaoTexto.textContent === '3')) {
-
+      //numero par com nota (lado direito)
+      else estrelas[i].setAttribute('src', fragEstrelas.amarelo[2]);
+  } else if (
+    eventTarget === estrelas[5] ||
+    (atualizarEditarComentario && avaliacaoTexto.textContent === '3')
+  ) {
     avalSpan.textContent = 3;
     inputComentario.value = 3;
     avalSpan.style.color = fragEstrelas.amarelo[0];
     for (let i = 0; i <= 9; i++)
-      if ((i % 2 === 0 || i === 0) && i < 6) //numero impar com nota (lado direito)
+      if ((i % 2 === 0 || i === 0) && i < 6)
+        //numero impar com nota (lado direito)
         estrelas[i].setAttribute('src', fragEstrelas.amarelo[1]);
-      else if (i >= 6 && i % 2 === 0) // numero impar cinza (lado esquerdo)
+      else if (i >= 6 && i % 2 === 0)
+        // numero impar cinza (lado esquerdo)
         estrelas[i].setAttribute('src', fragEstrelas.cinza[1]);
-      else if (i >= 6 && i % 2 !== 0) // numero par cinza (lado direito)
+      else if (i >= 6 && i % 2 !== 0)
+        // numero par cinza (lado direito)
         estrelas[i].setAttribute('src', fragEstrelas.cinza[2]);
-      else //numero par com nota (lado direito)
-        estrelas[i].setAttribute('src', fragEstrelas.amarelo[2]);
-
-  } else if (eventTarget === estrelas[4] || (atualizarEditarComentario && avaliacaoTexto.textContent === '2.5')) {
-
+      //numero par com nota (lado direito)
+      else estrelas[i].setAttribute('src', fragEstrelas.amarelo[2]);
+  } else if (
+    eventTarget === estrelas[4] ||
+    (atualizarEditarComentario && avaliacaoTexto.textContent === '2.5')
+  ) {
     avalSpan.textContent = 2.5;
     inputComentario.value = 2.5;
     avalSpan.style.color = fragEstrelas.amarelo[0];
     for (let i = 0; i <= 9; i++)
-      if ((i % 2 === 0 || i === 0) && i < 5) //numero impar com nota (lado direito)
+      if ((i % 2 === 0 || i === 0) && i < 5)
+        //numero impar com nota (lado direito)
         estrelas[i].setAttribute('src', fragEstrelas.amarelo[1]);
-      else if (i >= 5 && i % 2 === 0) // numero impar cinza (lado esquerdo)
+      else if (i >= 5 && i % 2 === 0)
+        // numero impar cinza (lado esquerdo)
         estrelas[i].setAttribute('src', fragEstrelas.cinza[1]);
-      else if (i >= 5 && i % 2 !== 0) // numero par cinza (lado direito)
+      else if (i >= 5 && i % 2 !== 0)
+        // numero par cinza (lado direito)
         estrelas[i].setAttribute('src', fragEstrelas.cinza[2]);
-      else //numero par com nota (lado direito)
-        estrelas[i].setAttribute('src', fragEstrelas.amarelo[2]);
-
-  } else if (eventTarget === estrelas[3] || (atualizarEditarComentario && avaliacaoTexto.textContent === '2')) {
-
+      //numero par com nota (lado direito)
+      else estrelas[i].setAttribute('src', fragEstrelas.amarelo[2]);
+  } else if (
+    eventTarget === estrelas[3] ||
+    (atualizarEditarComentario && avaliacaoTexto.textContent === '2')
+  ) {
     avalSpan.textContent = 2;
     inputComentario.value = 2;
     avalSpan.style.color = fragEstrelas.laranja[0];
     for (let i = 0; i <= 9; i++)
-      if ((i % 2 === 0 || i === 0) && i < 4) //numero impar com nota (lado direito)
+      if ((i % 2 === 0 || i === 0) && i < 4)
+        //numero impar com nota (lado direito)
         estrelas[i].setAttribute('src', fragEstrelas.laranja[1]);
-      else if (i >= 4 && i % 2 === 0) // numero impar cinza (lado esquerdo)
+      else if (i >= 4 && i % 2 === 0)
+        // numero impar cinza (lado esquerdo)
         estrelas[i].setAttribute('src', fragEstrelas.cinza[1]);
-      else if (i >= 4 && i % 2 !== 0) // numero par cinza (lado direito)
+      else if (i >= 4 && i % 2 !== 0)
+        // numero par cinza (lado direito)
         estrelas[i].setAttribute('src', fragEstrelas.cinza[2]);
-      else //numero par com nota (lado direito)
-        estrelas[i].setAttribute('src', fragEstrelas.laranja[2]);
-
-  } else if (eventTarget === estrelas[2] || (atualizarEditarComentario && avaliacaoTexto.textContent === '1.5')) {
-
+      //numero par com nota (lado direito)
+      else estrelas[i].setAttribute('src', fragEstrelas.laranja[2]);
+  } else if (
+    eventTarget === estrelas[2] ||
+    (atualizarEditarComentario && avaliacaoTexto.textContent === '1.5')
+  ) {
     avalSpan.textContent = 1.5;
     inputComentario.value = 1.5;
     avalSpan.style.color = fragEstrelas.vermelho[0];
     for (let i = 0; i <= 9; i++)
-      if ((i % 2 === 0 || i === 0) && i < 3) //numero impar com nota (lado direito)
+      if ((i % 2 === 0 || i === 0) && i < 3)
+        //numero impar com nota (lado direito)
         estrelas[i].setAttribute('src', fragEstrelas.vermelho[1]);
-      else if (i >= 3 && i % 2 === 0) // numero impar cinza (lado esquerdo)
+      else if (i >= 3 && i % 2 === 0)
+        // numero impar cinza (lado esquerdo)
         estrelas[i].setAttribute('src', fragEstrelas.cinza[1]);
-      else if (i >= 3 && i % 2 !== 0) // numero par cinza (lado direito)
+      else if (i >= 3 && i % 2 !== 0)
+        // numero par cinza (lado direito)
         estrelas[i].setAttribute('src', fragEstrelas.cinza[2]);
-      else //numero par com nota (lado direito)
-        estrelas[i].setAttribute('src', fragEstrelas.vermelho[2]);
-
-  } else if (eventTarget === estrelas[1] || (atualizarEditarComentario && avaliacaoTexto.textContent === '1')) {
-
+      //numero par com nota (lado direito)
+      else estrelas[i].setAttribute('src', fragEstrelas.vermelho[2]);
+  } else if (
+    eventTarget === estrelas[1] ||
+    (atualizarEditarComentario && avaliacaoTexto.textContent === '1')
+  ) {
     avalSpan.textContent = 1;
     inputComentario.value = 1;
     avalSpan.style.color = fragEstrelas.vermelho[0];
     for (let i = 0; i <= 9; i++)
-      if ((i % 2 === 0 || i === 0) && i < 2) //numero impar com nota (lado direito)
+      if ((i % 2 === 0 || i === 0) && i < 2)
+        //numero impar com nota (lado direito)
         estrelas[i].setAttribute('src', fragEstrelas.vermelho[1]);
-      else if (i >= 2 && i % 2 === 0) // numero impar cinza (lado esquerdo)
+      else if (i >= 2 && i % 2 === 0)
+        // numero impar cinza (lado esquerdo)
         estrelas[i].setAttribute('src', fragEstrelas.cinza[1]);
-      else if (i >= 2 && i % 2 !== 0) // numero par cinza (lado direito)
+      else if (i >= 2 && i % 2 !== 0)
+        // numero par cinza (lado direito)
         estrelas[i].setAttribute('src', fragEstrelas.cinza[2]);
-      else //numero par com nota (lado direito)
-        estrelas[i].setAttribute('src', fragEstrelas.vermelho[2]);
-
-  } else if (eventTarget === estrelas[0] || (atualizarEditarComentario && avaliacaoTexto.textContent === '0.5')) {
-
+      //numero par com nota (lado direito)
+      else estrelas[i].setAttribute('src', fragEstrelas.vermelho[2]);
+  } else if (
+    eventTarget === estrelas[0] ||
+    (atualizarEditarComentario && avaliacaoTexto.textContent === '0.5')
+  ) {
     avalSpan.textContent = 0.5;
     inputComentario.value = 0.5;
     avalSpan.style.color = fragEstrelas.vermelho[0];
     for (let i = 0; i <= 9; i++)
-      if ((i % 2 === 0 || i === 0) && i < 1) //numero impar com nota (lado direito)
+      if ((i % 2 === 0 || i === 0) && i < 1)
+        //numero impar com nota (lado direito)
         estrelas[i].setAttribute('src', fragEstrelas.vermelho[1]);
-      else if (i >= 1 && i % 2 === 0) // numero impar cinza (lado esquerdo)
+      else if (i >= 1 && i % 2 === 0)
+        // numero impar cinza (lado esquerdo)
         estrelas[i].setAttribute('src', fragEstrelas.cinza[1]);
-      else if (i >= 1 && i % 2 !== 0) // numero par cinza (lado direito)
+      else if (i >= 1 && i % 2 !== 0)
+        // numero par cinza (lado direito)
         estrelas[i].setAttribute('src', fragEstrelas.cinza[2]);
-      else //numero par com nota (lado direito)
-        estrelas[i].setAttribute('src', fragEstrelas.vermelho[2]);
-
+      //numero par com nota (lado direito)
+      else estrelas[i].setAttribute('src', fragEstrelas.vermelho[2]);
   }
 }
 
@@ -441,9 +459,16 @@ estrelasComentario.addEventListener('mousemove', function (e) {
   if (variaveisPHP['id'] === 'NaN') {
     avisarParaSeLogar();
   } else {
-    atualizarEstrelas(e.target, estrelasImg, avalUser, inputComentar, false, '');
+    atualizarEstrelas(
+      e.target,
+      estrelasImg,
+      avalUser,
+      inputComentar,
+      false,
+      '',
+    );
   }
-})
+});
 
 // Formatação do time stamp
 let dataComentario = document.querySelectorAll('.data-comentario');
@@ -470,17 +495,31 @@ btnValueApagar.forEach(function (elemento, indice) {
 //Verificando se o usuario pode editar aquele comentario existente
 let btnEditarComentario = document.querySelector('.btn-editar-comentario');
 if (btnEditarComentario !== null) {
-  let btnCancelarEditarComentario = document.querySelector('#btn-editar-cancelar');
+  let btnCancelarEditarComentario = document.querySelector(
+    '#btn-editar-cancelar',
+  );
   let formEditarComentario = document.querySelector('.editar-comentario');
   let inputEditarIdUsuario = document.querySelector('#editar-id-usuario');
   let editarComentarioDiv = document.querySelector('#comentar-estrelas-editar');
-  let editarComentarioEstrelas = editarComentarioDiv.querySelectorAll('span img');
+  let editarComentarioEstrelas =
+    editarComentarioDiv.querySelectorAll('span img');
   let avaliacaoUsuarioEditar = document.querySelector('#avaliacao-usuario');
-  let inputEditarComentario = document.querySelector('#editar-avaliacao-usuario-input');
-  let textareaEditarComentario = document.querySelector('#editar-comentario-textarea');
+  let inputEditarComentario = document.querySelector(
+    '#editar-avaliacao-usuario-input',
+  );
+  let textareaEditarComentario = document.querySelector(
+    '#editar-comentario-textarea',
+  );
   let spanEditarComentario = document.querySelector('#span-comentario-editar');
 
-  atualizarEstrelas('', editarComentarioEstrelas, avaliacaoUsuarioEditar, inputEditarComentario, true, avaliacaoUsuarioEditar);
+  atualizarEstrelas(
+    '',
+    editarComentarioEstrelas,
+    avaliacaoUsuarioEditar,
+    inputEditarComentario,
+    true,
+    avaliacaoUsuarioEditar,
+  );
 
   btnEditarComentario.addEventListener('click', () => {
     if (inputEditarIdUsuario.value === variaveisPHP['id'])
@@ -490,7 +529,7 @@ if (btnEditarComentario !== null) {
 
   btnCancelarEditarComentario.addEventListener('click', () => {
     if (inputEditarIdUsuario.value === variaveisPHP['id'])
-      if (!(formEditarComentario.classList.contains('d-none')))
+      if (!formEditarComentario.classList.contains('d-none'))
         formEditarComentario.classList.toggle('d-none');
   });
 
@@ -498,25 +537,31 @@ if (btnEditarComentario !== null) {
     if (variaveisPHP['id'] === 'NaN') {
       avisarParaSeLogar();
     } else {
-      atualizarEstrelas(e.target, editarComentarioEstrelas, avaliacaoUsuarioEditar, inputEditarComentario, false, '');
+      atualizarEstrelas(
+        e.target,
+        editarComentarioEstrelas,
+        avaliacaoUsuarioEditar,
+        inputEditarComentario,
+        false,
+        '',
+      );
     }
   });
 
   //Atualizando textarea
-  spanEditarComentario.textContent = `${(textareaEditarComentario.value).length} / 1200`;
-  if ((textareaEditarComentario.value).length < 1200)
-    spanEditarComentario.style.color = "#212529";
-  else
-    spanEditarComentario.style.color = '#ff4122';
+  spanEditarComentario.textContent = `${textareaEditarComentario.value.length} / 1200`;
+  if (textareaEditarComentario.value.length < 1200)
+    spanEditarComentario.style.color = '#212529';
+  else spanEditarComentario.style.color = '#ff4122';
   textareaEditarComentario.addEventListener('input', function () {
     if (variaveisPHP['id'] === 'NaN') {
       iniciarComentario(true);
     } else {
-      if ((textareaEditarComentario.value).length < 1200) {
-        spanEditarComentario.textContent = `${(textareaEditarComentario.value).length} / 1200`;
-        spanEditarComentario.style.color = "#212529";
+      if (textareaEditarComentario.value.length < 1200) {
+        spanEditarComentario.textContent = `${textareaEditarComentario.value.length} / 1200`;
+        spanEditarComentario.style.color = '#212529';
       } else {
-        spanEditarComentario.textContent = `${(textareaEditarComentario.value).length} / 1200`;
+        spanEditarComentario.textContent = `${textareaEditarComentario.value.length} / 1200`;
         spanEditarComentario.style.color = fragEstrelas.vermelho[0];
       }
     }
@@ -537,7 +582,9 @@ if (variaveisPHP['temporadaUnica'] === 'true') {
   //Formatação dos episodios
   if (episodiosTitulo.textContent) {
     let stringEpisodios;
-    episodiosTitulo.textContent === '1' ? stringEpisodios = 'epísodio' : stringEpisodios = 'epísodios';
+    episodiosTitulo.textContent === '1'
+      ? (stringEpisodios = 'epísodio')
+      : (stringEpisodios = 'epísodios');
     episodiosTitulo.classList.toggle('d-none');
     episodiosTitulo.textContent = `${episodiosTitulo.textContent} ${stringEpisodios}`;
   }
@@ -546,24 +593,30 @@ if (variaveisPHP['temporadaUnica'] === 'true') {
     duracaoTitulo.classList.toggle('d-none');
     //Formatação da duração
     let tempoEmMinutos = duracaoTitulo.textContent;
-    if (tempoEmMinutos < 60)
-      duracaoTitulo.textContent = `${tempoEmMinutos}min`
+    if (tempoEmMinutos < 60) duracaoTitulo.textContent = `${tempoEmMinutos}min`;
     else {
       let horasFormatada = parseFloat(tempoEmMinutos) / 60;
       let horasFormataEmString = horasFormatada.toString();
-      let horasEmMinutos = horasFormataEmString.slice(horasFormataEmString.indexOf('.'));
+      let horasEmMinutos = horasFormataEmString.slice(
+        horasFormataEmString.indexOf('.'),
+      );
       horasEmMinutos = parseFloat(`0${horasEmMinutos}`);
       horasEmMinutos = horasEmMinutos * 60;
-      duracaoTitulo.textContent = `${parseInt(horasFormatada)}h ${parseInt(horasEmMinutos)}min`;
+      duracaoTitulo.textContent = `${parseInt(horasFormatada)}h ${parseInt(
+        horasEmMinutos,
+      )}min`;
     }
   } else {
     let stringEpisodios, stringTemporadas;
-    episodiosTitulo.textContent === '1' ? stringEpisodios = 'epísodio' : stringEpisodios = 'epísodios';
-    temporadaTitulo.textContent === '1' ? stringTemporadas = 'temporada' : stringTemporadas = 'temporadas';
+    episodiosTitulo.textContent === '1'
+      ? (stringEpisodios = 'epísodio')
+      : (stringEpisodios = 'epísodios');
+    temporadaTitulo.textContent === '1'
+      ? (stringTemporadas = 'temporada')
+      : (stringTemporadas = 'temporadas');
     temporadaTitulo.classList.toggle('d-none');
     episodiosTitulo.classList.toggle('d-none');
     temporadaTitulo.textContent = `${temporadaTitulo.textContent} ${stringTemporadas}`;
     episodiosTitulo.textContent = `${episodiosTitulo.textContent} ${stringEpisodios}`;
   }
 }
-
