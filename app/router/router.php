@@ -1,18 +1,10 @@
 <?php
 
-function routes()
-{
-  return require_once 'routes.php';
-}
-
 function exactMatchUriInArrayRoutes($uri, $routes)
 {
   //Procura no array de rotas aquele uri fixas
-  if (array_key_exists($uri, $routes)) {
-    //Se achar, retorna a uri exata no array
-    return [$uri => $routes[$uri]];
-  }
-  return []; //Se não, retorna um array vazio
+  //Se achar, retorna a uri exata no array
+  return (array_key_exists($uri, $routes)) ? [$uri => $routes[$uri]] : []; //Se não, retorna um array vazio
 }
 
 function regularExpressionMatchArrayRoutes($uri, $routes)
@@ -59,14 +51,16 @@ function router()
   //Retorna o uri
   $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
   //Array com todas as rotas
-  $routes = routes();
+  $routes = require_once 'routes.php';
+  $requestMethod = $_SERVER['REQUEST_METHOD']; // Retorna o tipo de requisição
+
   //Retorna o uri correto
-  $matchedUri = exactMatchUriInArrayRoutes($uri, $routes);
+  $matchedUri = exactMatchUriInArrayRoutes($uri, $routes[$requestMethod]);
 
   $params = [];
   if (empty($matchedUri)) {
     //Se não encontrar a rota, vai procurar pelo regex no uri
-    $matchedUri = regularExpressionMatchArrayRoutes($uri, $routes);
+    $matchedUri = regularExpressionMatchArrayRoutes($uri, $routes[$requestMethod]);
     $uri = explode('/', ltrim($uri, '/'));
     //Caso seja uma uri dinamica e eu queira os parametros nela, utilizo o função params
     //Retorna os parametros da uri Regex, com os index de acordo com o explode

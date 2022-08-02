@@ -20,5 +20,11 @@ function controller($matchedUri, $params)
     //Se o metodo NÃO existir, joga um erro na tela
     throw new Exception("Esse metodo {$method} não existe no controller {$controller}");
 
-  return $controllerInstance->$method($params); //Retornando um array para o router e depois index.php
+  $controller = $controllerInstance->$method($params);
+
+  if ($_SERVER['REQUEST_METHOD'] === 'POST')
+    //Se o metodo de requisição for POST, finaliza o programa para evitar que no public/index.php execute o restante
+    die();
+
+  return $controller; //Retornando um array para o router e depois index.php
 }
