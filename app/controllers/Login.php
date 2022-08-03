@@ -7,7 +7,7 @@ class Login
   public function index($params)
   {
     return [
-      'view' => 'login.php',
+      'view' => 'login' . VIEW_EXT,
       'data' => ['title' => 'Login']
     ];
   }

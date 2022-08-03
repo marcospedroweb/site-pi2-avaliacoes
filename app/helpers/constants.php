@@ -6,3 +6,4 @@ define('VIEWS', ROOT . '/app/views/');
 define('DATABASE_PATH', ROOT . 'database\\');
 define('ASSETS_PATH', ROOT . 'Public\\assets');
 define('LOGGED', 'LOGGED');
+define('VIEW_EXT', '.view.php');

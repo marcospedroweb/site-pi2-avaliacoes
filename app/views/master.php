@@ -59,6 +59,7 @@
     <ul>
       <li><a href="/">inicio</a></li>
       <li><a href="/login">login</a></li>
+      <li><a href="/user/create">cadastro</a></li>
     </ul>
     <h1>
       Bem vindo,
