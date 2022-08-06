@@ -1,6 +1,6 @@
 <?php
 
-function validate(array $validations): array
+function validate(array $validations)
 {
   $result = [];
   $param = '';

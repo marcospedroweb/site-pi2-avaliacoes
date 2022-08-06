@@ -7,7 +7,7 @@ function setFlash(string $index, string $message): void
     $_SESSION['flash'][$index] = $message;
 }
 
-function getFlash(string $index, string $style = 'color:red'): string
+function getFlash(string $index, string $style = 'color:red')
 {
   //Mostra a messagem na sessão
   if (isset($_SESSION['flash'][$index])) {
