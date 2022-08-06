@@ -1,6 +1,8 @@
+<?php $this->layout('master', ['title' => $title]) ?>
+
 <h2>Create</h2>
 
-
+<?php echo getFlash('message') ?>
 <form action="/user/create" method="POST">
   <div>
     <input type="text" name="name">

@@ -1,5 +1,9 @@
+<?php $this->layout('master', ['title' => $title]) ?>
+
 <h2>Login</h2>
 <?php echo getFlash('message') ?>
+
+<?php if (logged()) return redirect('/') ?>
 
 <form action="/login" method="POST">
   <div>

@@ -1,6 +1,6 @@
 <?php
 
-function connect()
+function connect(): PDO
 {
   return new PDO(
     'mysql:host=localhost;dbname=Avalifind',

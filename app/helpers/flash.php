@@ -1,13 +1,13 @@
 <?php
 
-function setFlash($index, $message)
+function setFlash(string $index, string $message): void
 {
   //Adiciona a messagem a sessão
   if (!isset($_SESSION['flash'][$index]))
     $_SESSION['flash'][$index] = $message;
 }
 
-function getFlash($index, $style = 'color:red')
+function getFlash(string $index, string $style = 'color:red'): string
 {
   //Mostra a messagem na sessão
   if (isset($_SESSION['flash'][$index])) {

@@ -7,7 +7,7 @@ class Login
   public function index($params)
   {
     return [
-      'view' => 'login' . VIEW_EXT,
+      'view' => 'login',
       'data' => ['title' => 'Login']
     ];
   }
@@ -16,7 +16,7 @@ class Login
   {
     //Retorna o valor dos campos do login
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_EMAIL);
+    $password = filter_string_polyfill($_POST['password']);
 
     if (empty($email) || empty($password))
       //Se o email ou senha estiver vazio, retorna um erro
@@ -27,7 +27,7 @@ class Login
       //Se não encontrar, volta para pagina de login
       return setMessageErrorLoginAndRedirect('message', 'Email e/ou senha inválido(s)', '/login');
 
-    if (!$password)
+    if (!password_verify($password, $user[0]->password))
       //Verificando se a senha passada é compativel com a cadastrada
       return setMessageErrorLoginAndRedirect('message', 'Email e/ou senha inválido(s)', '/login');
 

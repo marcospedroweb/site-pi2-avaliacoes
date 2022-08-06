@@ -25,12 +25,14 @@ try {
     throw new Exception('O índice view não foi encontrado.');
 
   // Verificando se exite um arquivo com o nome daquele view
-  if (!file_exists(VIEWS . $data['view']))
+  if (!file_exists(VIEWS . $data['view'] . '.php'))
     throw new Exception("A view {$data['view']} não foi encontrado.");
 
-  $view = $data['view'];
+  // Create new Plates instance
+  $templates = new League\Plates\Engine(VIEWS);
 
-  require_once VIEWS . 'master.php';
+  // Render a template
+  echo $templates->render($data['view'], $data['data']);
 } catch (Exception $e) {
   //Se ocorrer algum erro nas rotas, avisa com um erro
   var_dump($e->getMessage());

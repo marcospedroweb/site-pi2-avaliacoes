@@ -7,21 +7,30 @@ namespace Composer\Autoload;
 class ComposerStaticInit85ecf2772d21671e4052e0aad0d00772
 {
     public static $files = array (
+        'ff8eb33fa35dd77dc422198d0eae994c' => __DIR__ . '/../..' . '/app/core/controller.php',
+        '264a786b23bf46be20caff46c64d291c' => __DIR__ . '/../..' . '/app/database/connect.php',
+        '3626d367c64e8eae583306f6ec554d30' => __DIR__ . '/../..' . '/app/database/fetch.php',
+        '0041f10b31da94595f5dc2ad3f1a9000' => __DIR__ . '/../..' . '/app/database/create.php',
+        '154ae8bfd0c2ab874d0236d2b1a27cfa' => __DIR__ . '/../..' . '/app/database/update.php',
+        '4347c15451a7f76d5793db5545401cec' => __DIR__ . '/../..' . '/app/database/delete.php',
         '97327a360a019aef6c5eb77040e50afb' => __DIR__ . '/../..' . '/app/helpers/constants.php',
         '6223be9ccf7f5aa65eb76133d4a6c7c7' => __DIR__ . '/../..' . '/app/helpers/redirect.php',
         '7c1a9d49581e67fdb0b527f369b6e725' => __DIR__ . '/../..' . '/app/helpers/flash.php',
         '4b95a27fb2e52614c59646f03e7385f9' => __DIR__ . '/../..' . '/app/helpers/sessions.php',
         'cc3aedb86a2dd08f4e6abd2d8053a2b6' => __DIR__ . '/../..' . '/app/helpers/validate.php',
+        '7f2562a76cf09544c0476f4a73de6566' => __DIR__ . '/../..' . '/app/helpers/validations.php',
+        'f1c19b666709f6a531b1eeff45341fad' => __DIR__ . '/../..' . '/app/helpers/helpers.php',
         '46bb0bfabef0eb65e285e67dfa001295' => __DIR__ . '/../..' . '/app/router/router.php',
-        'ff8eb33fa35dd77dc422198d0eae994c' => __DIR__ . '/../..' . '/app/core/controller.php',
-        '264a786b23bf46be20caff46c64d291c' => __DIR__ . '/../..' . '/app/database/connect.php',
-        '3626d367c64e8eae583306f6ec554d30' => __DIR__ . '/../..' . '/app/database/fetch.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'a' => 
         array (
             'app\\' => 4,
+        ),
+        'L' => 
+        array (
+            'League\\Plates\\' => 14,
         ),
     );
 
@@ -30,10 +39,27 @@ class ComposerStaticInit85ecf2772d21671e4052e0aad0d00772
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
+        'League\\Plates\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/plates/src',
+        ),
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'League\\Plates\\Engine' => __DIR__ . '/..' . '/league/plates/src/Engine.php',
+        'League\\Plates\\Extension\\Asset' => __DIR__ . '/..' . '/league/plates/src/Extension/Asset.php',
+        'League\\Plates\\Extension\\ExtensionInterface' => __DIR__ . '/..' . '/league/plates/src/Extension/ExtensionInterface.php',
+        'League\\Plates\\Extension\\URI' => __DIR__ . '/..' . '/league/plates/src/Extension/URI.php',
+        'League\\Plates\\Template\\Data' => __DIR__ . '/..' . '/league/plates/src/Template/Data.php',
+        'League\\Plates\\Template\\Directory' => __DIR__ . '/..' . '/league/plates/src/Template/Directory.php',
+        'League\\Plates\\Template\\FileExtension' => __DIR__ . '/..' . '/league/plates/src/Template/FileExtension.php',
+        'League\\Plates\\Template\\Folder' => __DIR__ . '/..' . '/league/plates/src/Template/Folder.php',
+        'League\\Plates\\Template\\Folders' => __DIR__ . '/..' . '/league/plates/src/Template/Folders.php',
+        'League\\Plates\\Template\\Func' => __DIR__ . '/..' . '/league/plates/src/Template/Func.php',
+        'League\\Plates\\Template\\Functions' => __DIR__ . '/..' . '/league/plates/src/Template/Functions.php',
+        'League\\Plates\\Template\\Name' => __DIR__ . '/..' . '/league/plates/src/Template/Name.php',
+        'League\\Plates\\Template\\Template' => __DIR__ . '/..' . '/league/plates/src/Template/Template.php',
         'app\\controllers\\Home' => __DIR__ . '/../..' . '/app/controllers/Home.php',
         'app\\controllers\\Login' => __DIR__ . '/../..' . '/app/controllers/Login.php',
         'app\\controllers\\User' => __DIR__ . '/../..' . '/app/controllers/User.php',

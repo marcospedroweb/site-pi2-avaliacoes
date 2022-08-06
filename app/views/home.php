@@ -1,3 +1,5 @@
+<?php $this->layout('master', ['title' => $title]) ?>
+
 <h2>Home</h2>
 
 <ul>

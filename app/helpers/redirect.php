@@ -1,11 +1,11 @@
 <?php
 
-function redirect($to)
+function redirect(string $to)
 {
   return header('Location: ' . $to);
 }
 
-function setMessageErrorLoginAndRedirect($index, $message, $redirectTo = '/')
+function setMessageErrorLoginAndRedirect(string $index, string $message, string $redirectTo = '/')
 {
   setFlash($index, $message);
   return redirect($redirectTo);

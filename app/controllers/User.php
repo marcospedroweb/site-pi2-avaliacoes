@@ -11,16 +11,12 @@ class User
       return redirect('/');
 
     $user = findBy('users', 'id', $params['user']);
-
-    echo "<pre>";
-    var_dump($user);
-    die();
   }
 
   public function create()
   {
     return [
-      'view' => 'create' . VIEW_EXT,
+      'view' => 'create',
       'data' => ['title' => 'Create',]
     ];
   }
@@ -29,13 +25,24 @@ class User
   {
     //Validando os dados dos inputs
     $validate = validate([
-      'name' => 'required|maxlen:20',
+      'name' => 'required|minlen:2|maxlen:20',
       'email' => 'required|email|unique:users',
-      'password' => 'required|maxlen:18',
+      'password' => 'required|minlen:8|maxlen:18',
     ]);
 
     // Se não passar na validação, retorna o usuario para a pagina de cadastro
     if (!$validate)
       return redirect('/user/create');
+
+    $validate['password'] = password_hash($validate['password'], PASSWORD_DEFAULT);
+
+    $created = create('users', $validate);
+
+    if (!$created) {
+      setFlash('message', 'Houve um erro ao cadastrar, tente novamente em alguns segundos');
+      return redirect('/user/create');
+    }
+
+    return redirect('/');
   }
 }
