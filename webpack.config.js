@@ -1,11 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  mode: process.env.NODE_ENV,
-  devtool: process.env.NODE_ENV === 'development' ? 'source-map' : '',
-  entry: {
-    app: ['@babel/polyfill', './public/assets/js/script.js'],
-  },
+  entry: './public/assets/js/script.js',
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: '[name].js',
