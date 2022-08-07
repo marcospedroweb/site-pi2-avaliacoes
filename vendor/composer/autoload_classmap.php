@@ -23,4 +23,5 @@ return array(
     'app\\controllers\\Home' => $baseDir . '/app/controllers/Home.php',
     'app\\controllers\\Login' => $baseDir . '/app/controllers/Login.php',
     'app\\controllers\\User' => $baseDir . '/app/controllers/User.php',
+    'app\\controllers\\Users' => $baseDir . '/app/controllers/Users.php',
 );

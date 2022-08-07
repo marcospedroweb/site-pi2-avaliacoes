@@ -26,3 +26,9 @@ if (!function_exists('dd')) {
     die();
   }
 }
+
+function isFetch()
+{
+  // Verifica se a requisição é um ajax ou não
+  return isset($_SERVER["HTTP_SEC_FETCH_MODE"]) && $_SERVER["HTTP_SEC_FETCH_MODE"] === 'cors';
+}

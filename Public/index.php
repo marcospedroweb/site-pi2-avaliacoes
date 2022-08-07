@@ -7,6 +7,10 @@ try {
   //Inicia o sistema de rotas
   $data = router();
 
+  if (isFetch()) {
+    die();
+  }
+
   //Verificando se exite $data['data']
   if (!isset($data['data']))
     //Se não exisitir, avisa com um erro
