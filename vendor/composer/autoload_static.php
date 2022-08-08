@@ -20,6 +20,8 @@ class ComposerStaticInit85ecf2772d21671e4052e0aad0d00772
         'cc3aedb86a2dd08f4e6abd2d8053a2b6' => __DIR__ . '/../..' . '/app/helpers/validate.php',
         '7f2562a76cf09544c0476f4a73de6566' => __DIR__ . '/../..' . '/app/helpers/validations.php',
         'f1c19b666709f6a531b1eeff45341fad' => __DIR__ . '/../..' . '/app/helpers/helpers.php',
+        'e2191932d7def3fc354fcf9f406f2111' => __DIR__ . '/../..' . '/app/helpers/old.php',
+        '4f540cacf2b715a82fc56f99e19b271c' => __DIR__ . '/../..' . '/app/helpers/csrf.php',
         '46bb0bfabef0eb65e285e67dfa001295' => __DIR__ . '/../..' . '/app/router/router.php',
     );
 

@@ -1,19 +1,34 @@
 <?php
 
-function validate(array $validations)
+function validate(array $validations, bool $perisistInputs = false, bool $checkCsrf = false)
 {
   $result = [];
   $param = '';
   //Responsável por validar os dados do array
-  foreach ($validations as $field => $validate) {
+  foreach ($validations as $field => $validate)
     $result[$field] = (!str_contains($validate, '|'))
       ? singleValidation($validate, $field, $param)
       : multipleValidations($validate, $field, $param);
-  }
+
+
+  //Verifica o csrf
+  if ($checkCsrf)
+    try {
+      checkCsrf();
+    } catch (Exception $e) {
+      dd($e->getMessage);
+    }
+
+  //Se possuir dados enviados no formulario, armazena-os temporariamente
+  if ($perisistInputs)
+    setOld();
 
   //Procura no array se há algum resultado que deu false, retornando "erro"
   if (in_array(false, $result))
     return false;
+
+  //Se não houve erros apaga da sessão os dados armazenados
+  destroyOld();
 
   return $result;
 }

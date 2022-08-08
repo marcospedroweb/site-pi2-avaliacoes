@@ -28,7 +28,7 @@ class User
       'name' => 'required|minlen:2|maxlen:20',
       'email' => 'required|email|unique:users',
       'password' => 'required|minlen:8|maxlen:18',
-    ]);
+    ], perisistInputs: true, checkCsrf: true);
 
     // Se não passar na validação, retorna o usuario para a pagina de cadastro
     if (!$validate)

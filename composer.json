@@ -25,6 +25,8 @@
       "app/helpers/validate.php",
       "app/helpers/validations.php",
       "app/helpers/helpers.php",
+      "app/helpers/old.php",
+      "app/helpers/csrf.php",
       "app/router/router.php"
     ],
     "psr-4": {
