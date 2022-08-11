@@ -7,8 +7,6 @@ class Home
   public function index($params)
   {
     read('users');
-    where('id', '>', 5);
-
     $users = execute();
 
     return [

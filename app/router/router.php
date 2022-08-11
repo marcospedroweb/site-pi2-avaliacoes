@@ -69,6 +69,11 @@ function router()
     $params = paramsFormat($uri, $params);
   }
 
+  if ($_ENV['MAINTENANCE'] === 'true') {
+    dd('Em manutenção');
+    $matchedUri = ['maintenance' => 'Maintenance@index'];
+  }
+
   if (!empty($matchedUri)) {
     //Se encontrar a rota compativel, inicia o metodo para retornar a pagina
     return controller($matchedUri, $params);

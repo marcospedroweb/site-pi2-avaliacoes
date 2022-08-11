@@ -4,6 +4,7 @@ require_once '../vendor/autoload.php';
 require_once './bootstrap.php';
 
 try {
+
   //Inicia o sistema de rotas
   $data = router();
 

@@ -6,22 +6,10 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'League\\Plates\\Engine' => $vendorDir . '/league/plates/src/Engine.php',
-    'League\\Plates\\Extension\\Asset' => $vendorDir . '/league/plates/src/Extension/Asset.php',
-    'League\\Plates\\Extension\\ExtensionInterface' => $vendorDir . '/league/plates/src/Extension/ExtensionInterface.php',
-    'League\\Plates\\Extension\\URI' => $vendorDir . '/league/plates/src/Extension/URI.php',
-    'League\\Plates\\Template\\Data' => $vendorDir . '/league/plates/src/Template/Data.php',
-    'League\\Plates\\Template\\Directory' => $vendorDir . '/league/plates/src/Template/Directory.php',
-    'League\\Plates\\Template\\FileExtension' => $vendorDir . '/league/plates/src/Template/FileExtension.php',
-    'League\\Plates\\Template\\Folder' => $vendorDir . '/league/plates/src/Template/Folder.php',
-    'League\\Plates\\Template\\Folders' => $vendorDir . '/league/plates/src/Template/Folders.php',
-    'League\\Plates\\Template\\Func' => $vendorDir . '/league/plates/src/Template/Func.php',
-    'League\\Plates\\Template\\Functions' => $vendorDir . '/league/plates/src/Template/Functions.php',
-    'League\\Plates\\Template\\Name' => $vendorDir . '/league/plates/src/Template/Name.php',
-    'League\\Plates\\Template\\Template' => $vendorDir . '/league/plates/src/Template/Template.php',
-    'app\\controllers\\Home' => $baseDir . '/app/controllers/Home.php',
-    'app\\controllers\\Login' => $baseDir . '/app/controllers/Login.php',
-    'app\\controllers\\User' => $baseDir . '/app/controllers/User.php',
-    'app\\controllers\\Users' => $baseDir . '/app/controllers/Users.php',
+    'PhpToken' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
+    'Stringable' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+    'UnhandledMatchError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
+    'ValueError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
 );
