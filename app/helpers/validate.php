@@ -2,9 +2,11 @@
 
 function validate(array $validations, bool $perisistInputs = false, bool $checkCsrf = false)
 {
+  //Responsável por validar os dados do array
   $result = [];
   $param = '';
-  //Responsável por validar os dados do array
+
+  //Verifica se aquele campo há UMA validação ou VARIAS 
   foreach ($validations as $field => $validate)
     $result[$field] = (!str_contains($validate, '|'))
       ? singleValidation($validate, $field, $param)
@@ -30,35 +32,43 @@ function validate(array $validations, bool $perisistInputs = false, bool $checkC
   //Se não houve erros apaga da sessão os dados armazenados
   destroyOld();
 
+  //Se não houve erros retorna os campos validados
   return $result;
 }
 
 function singleValidation(string $validate, string $field, string $param)
 {
   //Verifica se há "|" na validação, se NÃO houver, há apenas 1 validate
+
+  //Verifica se há o separador ':', retornando a 1° variavel a função que será executada
+  //retornando a 2° variavel os parametros requisitados
   if (str_contains($validate, ':'))
     [$validate, $param] = explode(':', $validate);
 
-  return $validate($field, $param); // Chamando a função required e armazena o resultado
+  return $validate($field, $param); // Chamando a função nomeada e seus parametros
 }
 
 function multipleValidations(string $validate, string $field, string $param)
 {
   //Verifica se há "|" na validação, se houver, há mais de 1 validate
   $result = [];
-  $explodePipeValidate = explode('|', $validate);
+  $explodePipeValidate = explode('|', $validate); //Separa os validates
+
   foreach ($explodePipeValidate as $validate) {
+    //Em cada validade, verifica se há o separador ':'
     //Verificando se há parametro
     if (str_contains($validate, ':'))
-      //Se houver, separa o valor e paramtro
+      //retornando a 1° variavel a função que será executada
+      //retornando a 2° variavel os parametros requisitados
       [$validate, $param] = explode(':', $validate);
 
     $result[$field] = $validate($field, $param); //Executa a função de acordo com o nome
 
-    // Verificando se aquele campo JÁ foi validade, se já foi validado, para o foreach e já retorna algum erro
+    // Verificando se aquele campo JÁ foi validade, se já foi validado, PARA o foreach e já retorna algum erro
     if (isset($result[$field]) && $result[$field] === false)
       break;
   }
 
+  //Retorna o campo com seu resultado
   return $result[$field];
 }

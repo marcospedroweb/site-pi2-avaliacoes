@@ -29,6 +29,17 @@ if (!function_exists('dd')) {
 
 function isFetch()
 {
-  // Verifica se a requisição é um ajax ou não
+  // Verifica se a requisição é um fetch js ou não
   return isset($_SERVER["HTTP_SEC_FETCH_MODE"]) && $_SERVER["HTTP_SEC_FETCH_MODE"] === 'cors';
+}
+
+function fd($data)
+{
+  //Dump amigavel
+
+  //Quando o sistema está em produção, mostra um erro "amigavel" ao usuario
+  if ($_ENV['PRODUCTION'] === 'true')
+    dd('Houve algum erro');
+  //Quando o sistema NÃO está em produção, mostra um dump comum
+  dd($data);
 }

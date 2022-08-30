@@ -1,4 +1,5 @@
 <?php
+//Aqui é onde está todas as constantes
 
 define('CONTROLLER_PATH', "app\\controllers\\");
 define('ROOT', dirname(__FILE__, 3)); // Raiz do projeto

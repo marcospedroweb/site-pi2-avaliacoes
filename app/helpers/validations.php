@@ -18,25 +18,27 @@ function email(string $field)
   //Verificando se o email é valido
   $emailIsValid = filter_input(INPUT_POST, $field, FILTER_VALIDATE_EMAIL);
   if (!$emailIsValid) {
+    //Se não for, retona um erro
     setFlash($field, "O campo tem que ser um email válido");
     return false;
   }
 
-  return filter_string_polyfill($emailIsValid);
+  return filter_string_polyfill($emailIsValid); //Retorna aquele dado filtrado
 }
 
 function unique(string $field, string $param)
 {
-  //Verifica se aquele dado já esta cadastrado na tabela
+  //Verifica se aquele dado já está cadastrado na tabela
   $data = filter_string_polyfill($_POST[$field]);
   $user = findBy($param, $field, $data);
 
   if ($user) {
+    //Se não haver, envia a mensagem
     setFlash($field, "O valor preenchido já está cadastrado.");
     return false;
   }
 
-  return $data;
+  return $data; // retorna um dado, igual o positivo
 }
 
 function maxlen(string $field, string $param)
@@ -45,11 +47,12 @@ function maxlen(string $field, string $param)
   $data = filter_string_polyfill($_POST[$field]);
 
   if (strlen($data) > $param) {
+    //Se passar do valor do parametro, retorna um erro
     setFlash($field, "Este campo deve ter no máximo $param caracteres");
     return false;
   }
 
-  return $data;
+  return $data; // retorna um dado, igual o positivo
 }
 
 function minlen(string $field, string $param)
@@ -63,5 +66,5 @@ function minlen(string $field, string $param)
     return false;
   }
 
-  return $data;
+  return $data; // retorna um dado, igual o positivo
 }

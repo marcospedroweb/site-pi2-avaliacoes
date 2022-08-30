@@ -6,7 +6,7 @@ return [
   ],
   'GET' => [
     '/' => 'Home@index',
-    '/users' => 'users@index',
+    '/users' => 'Users@index',
     '/user/[0-9]+' => 'User@show',
     '/user/create' => "User@create",
     '/login' => 'Login@index',
