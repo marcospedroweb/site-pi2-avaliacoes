@@ -7,9 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInit85ecf2772d21671e4052e0aad0d00772
 {
     public static $files = array (
-        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
+        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         'ff8eb33fa35dd77dc422198d0eae994c' => __DIR__ . '/../..' . '/app/core/controller.php',
         '264a786b23bf46be20caff46c64d291c' => __DIR__ . '/../..' . '/app/database/connect.php',
         '3626d367c64e8eae583306f6ec554d30' => __DIR__ . '/../..' . '/app/database/fetch.php',
@@ -38,6 +39,7 @@ class ComposerStaticInit85ecf2772d21671e4052e0aad0d00772
             'Symfony\\Polyfill\\Php80\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
+            'Symfony\\Component\\VarDumper\\' => 28,
         ),
         'P' => 
         array (
@@ -54,6 +56,7 @@ class ComposerStaticInit85ecf2772d21671e4052e0aad0d00772
         'D' => 
         array (
             'Dotenv\\' => 7,
+            'Doctrine\\Inflector\\' => 19,
         ),
     );
 
@@ -74,6 +77,10 @@ class ComposerStaticInit85ecf2772d21671e4052e0aad0d00772
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
+        'Symfony\\Component\\VarDumper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/var-dumper',
+        ),
         'PhpOption\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
@@ -89,6 +96,10 @@ class ComposerStaticInit85ecf2772d21671e4052e0aad0d00772
         'Dotenv\\' => 
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
+        ),
+        'Doctrine\\Inflector\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Inflector',
         ),
     );
 

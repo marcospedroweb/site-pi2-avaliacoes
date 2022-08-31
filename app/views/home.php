@@ -4,7 +4,7 @@
 
 <form action="/" method="GET">
   <label for="search">Buscar nome</label>
-  <input type="text" name="search" value="<?php echo filter_string_polyfill($_GET['search']) ?>">
+  <input type="text" name="search" value="<?php echo filter_string_polyfill($search) ?>">
   <button type="submit">Buscar</button>
 </form>
 

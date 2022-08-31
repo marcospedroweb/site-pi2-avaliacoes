@@ -7,7 +7,7 @@ function isAssociativeArray(array $arr): bool
   return array_keys($arr) !== range(0, count($arr) - 1);
 }
 
-function filter_string_polyfill(string $field): string
+function filter_string_polyfill($field)
 {
   //Filtra o dado
   $str = preg_replace('/\x00|<[^>]*>?/', '', $field);

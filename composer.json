@@ -9,7 +9,8 @@
   ],
   "require": {
     "league/plates": "^3.4",
-    "vlucas/phpdotenv": "^5.4"
+    "vlucas/phpdotenv": "^5.4",
+    "doctrine/inflector": "^2.0"
   },
   "autoload": {
     "files": [
@@ -33,5 +34,8 @@
     "psr-4": {
       "app\\": "app"
     }
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^6.1"
   }
 }

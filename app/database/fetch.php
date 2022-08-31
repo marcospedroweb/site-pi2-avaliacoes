@@ -1,5 +1,7 @@
 <?php
 // Todos os metodos utilizados para fazer requisições ao banco de dados
+use Doctrine\Inflector\InflectorFactory;
+
 
 function all(string $table, string $fields = '*'): array
 {
@@ -41,7 +43,11 @@ function read(string $table, string $fields = '*')
   //Realiza um SELECT de acordo com a tabela e seus campos
   global $query;
 
+  //Reseta o query builder
+  $query = [];
+
   $query['read'] = true; //Marcador, inicou um SELECT
+  $query['table'] = $table; //Armazena o nome da tabela
   $query['execute'] = []; //Array onde será armazenado os valores que substituirá os placeholders
 
   $query['sql'] = "SELECT {$fields} FROM {$table}"; //Inicia o SQL com os campos e tabela
@@ -106,6 +112,10 @@ function where()
   if (!isset($query['read']))
     throw new Exception('Antes de chamar o "where" é necessario chamar o "read"');
 
+  //Verifica se HÁ [WHERE], se houver, devolve um erro que não é possivel usar 2 where
+  if (isset($query['where']))
+    throw new Exception('Não é possivel chamar o "where" com o outro tipo de "where"');
+
   //Verifica se há entre 2-3 parametros, se não houver, devolve um erro
   if ($numArgs < 2 || $numArgs > 3)
     throw new Exception('O "where" deve ter 2 ou 3 parametros');
@@ -119,23 +129,8 @@ function where()
 
   $query['execute'] = [...$query['execute'], $field => $value]; // Recebe um array com [campo] e [valor] para ser substituir o placeholder
 
-  $query['sql'] = "{$query['sql']} where {$field} {$operator} :{$field}";
+  $query['sql'] = "{$query['sql']} WHERE {$field} {$operator} :{$field}";
 }
-
-// function where(string $field, string $operator, string $value)
-// {
-//   global $query;
-
-//   if (!isset($query['read']))
-//     throw new Exception('Antes de chamar o "where" é necessario chamar o "read"');
-
-//   if (func_num_args() !== 3)
-//     throw new Exception('O "where" deve ter 3 parametros');
-
-//   $query['where'] = true;
-//   $query['execute'] = [...$query['execute'], $field => $value];
-//   $query['sql'] = "{$query['sql']} where {$field} {$operator} :{$field}";
-// }
 
 function orWhere()
 {
@@ -165,13 +160,13 @@ function orWhere()
 
   //Se há 3 argumentos, adiciona o valor Ex: where('id', '10')
   //Se não há 3 argumentos,  adiciona o valor Ex: where('id', '<', '10')
-  $value = $numArgs === 3 ? $args[1] : $args[2];
+  $value = $numArgs === 3 ? $args[2] : $args[1];
 
   if ($numArgs === 3)
-    //Se há 3 argumentos, Ex: where('id', 'and', '10')
+    //Se há 3 argumentos, Ex: where('id', '10', 'and')
     $typeWhere = $args[2] === 'and' ? $args[2] : 'or';
   else
-    //Se não há 3 argumentos, Ex: where('id', '<', '10', 'and')
+    //Se não há 3 argumentos, ou seja, há 4 Ex: where('id', '<', '10', 'and')
     $typeWhere = isset($args[3]) && $args[3] === 'and' ? $args[3] : 'or';
 
   $query['where'] = true; //Marcador, adicionou [where]
@@ -179,23 +174,55 @@ function orWhere()
   $query['sql'] = "{$query['sql']} {$typeWhere} {$field} {$operator} :{$field}";
 }
 
-// function orWhere(string $field, string $operator, string $value, string $typeWhere = 'or')
-// {
-//   global $query;
+function whereIn(string $field, array $data)
+{
+  global $query;
+  //Complemento where in no SQL
 
-//   if (!isset($query['read']))
-//     throw new Exception('Antes de chamar o "where" é necessario chamar o "read"');
+  //Verifica se HÁ [WHERE], se houver, devolve um erro que não é possivel usar [where in] com [WHERE]
+  if (isset($query['where']))
+    throw new Exception('Não é possivel chamar o "where in" com o "where"');
 
-//   if (!isset($query['where']))
-//     throw new Exception('Antes de chamar o "or where" é necessario chamar o "where"');
+  $query['where'] = true; //Marcador, adicionou [where]
+  $query['sql'] = "{$query['sql']} WHERE {$field} IN (" . '\'' . implode('\', \'', $data) . "')";
+}
 
-//   if (func_num_args() < 3 || func_num_args() > 4)
-//     throw new Exception('O "where" deve ter 3 ou 4 parametros');
+function fieldFK(string $table, string $field)
+{
+  $inflector = InflectorFactory::create()->build();
+  $tableToSingular = $inflector->singularize($table); //Colocando o nome da tabela no singular
 
-//   $query['where'] = true;
-//   $query['execute'] = [...$query['execute'], $field => $value];
-//   $query['sql'] = "{$query['sql']} {$typeWhere} {$field} {$operator} :{$field}";
-// }
+  return $tableToSingular . ucfirst($field); //Concatena o nome da tabela com o nome do campo
+  //Ex: 'user' . ucfirst('id') -> 'userId'
+}
+
+function tableJoin(string $table, string $fieldFk, string $typeJoin = 'INNER')
+{
+  //Complementa o inner join ao sql
+  global $query;
+
+  //Verifica se HÁ [WHERE], se houver, devolve um erro que não é possivel usar [inner join] com [WHERE]
+  if (isset($query['where']))
+    throw new Exception('Não é possivel adicionar o "inner join" com o "where"');
+
+  $fkToJoin = fieldFK($query['table'], $fieldFk);
+  $query['sql'] = "{$query['sql']} {$typeJoin} JOIN {$table} ON {$table}.{$fkToJoin} = {$query['table']}.{$fieldFk}";
+}
+
+function tableJoinWithFK(string $table, string $fieldFk, string $typeJoin = 'INNER')
+{
+  //Complementa o join variado ao sql
+
+  global $query;
+  //Complementa o inner join ao sql
+
+  //Verifica se HÁ [WHERE], se houver, devolve um erro que não é possivel usar [inner join] com [WHERE]
+  if (isset($query['where']))
+    throw new Exception('Não é possivel adicionar o "inner join" com o "where"');
+
+  $fkToJoin = fieldFK($table, $fieldFk);
+  $query['sql'] = "{$query['sql']} {$typeJoin} JOIN {$table} ON {$table}.{$fieldFk} = {$query['table']}.{$fkToJoin}";
+}
 
 function search(array $search)
 {
@@ -210,7 +237,7 @@ function search(array $search)
   if (!isAssociativeArray(arr: $search))
     throw new Exception('Para buscar, o array deve ser associativo');
 
-  $sql = "{$query['sql']} where ";
+  $sql = "{$query['sql']} WHERE ";
 
   $execute = [];
   //Adiciona a quantidade de [where like] passadas pelo parametro
@@ -230,9 +257,10 @@ function execute(bool $isFetchAll = true, bool $isRowCount = false)
   //Executa o SELECT
   global $query;
 
+  dd($query);
+
   try {
     $connect = connect(); //Conecta ao banco
-
     //Verifica se há [SQL], se NÃO houver, devolve um erro que não é possivel usar executar o SQL inexistente
     if (!isset($query['sql']))
       throw new Exception('Para realizar o execute, DEVE haver o sql');
@@ -256,11 +284,13 @@ function execute(bool $isFetchAll = true, bool $isRowCount = false)
       return $prepare->fetch();
   } catch (Exception $e) {
     //Devolve um erro formatado
-    $message = "<div>Erro no arquivo {$e->getFile()} </div>
-    <div>na linha {$e->getLine()} </div> 
-    <div>com a mensagem: {$e->getMessage()} </div>
-    <div>{$query['sql']}</div>";
+    $error = [
+      'FILE' => $e->getFile(),
+      'LINE' => $e->getLine(),
+      'MESSAGE' => $e->getMessage(),
+      'SQL' => $query['sql']
+    ];
     //Dump amigavel
-    fd($message);
+    fd($error);
   }
 }
