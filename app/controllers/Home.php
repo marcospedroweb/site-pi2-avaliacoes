@@ -11,14 +11,15 @@ class Home
     $search = '';
     if (isset($_GET['search'])) {
       $search = filter_string_polyfill(field: $_GET['search']);
-      search(search: ['name' => $search, 'email' => $search]);
+      search(search: ['name' => $search]);
     }
+    paginate(1);
 
     $users = execute();
     // dd($users);
     return [
       'view' => 'home',
-      'data' => ['title' => 'Home', 'users' => $users, 'search' => $search]
+      'data' => ['title' => 'Home', 'users' => $users, 'search' => $search, 'links' => render()]
     ];
   }
 }

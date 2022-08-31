@@ -80,8 +80,62 @@ function paginate(string|int $perPage = 10)
   if (isset($query['limit']))
     throw new Exception('Não é possivel realizar o "paginate" com o "limit"');
 
-  $query['paginate'] = true; //Marcador, adicionou [paginate]
+  $rowCount = execute(isRowCount: true);
+  $page = (int)filter_string_polyfill($_GET['page'] ?? 1);
 
+  $query['currentPage'] = $page; // armazena a pagina atual
+  // [ceil] arredonda para cima
+  $query['pageCount'] = (int)ceil($rowCount / $perPage); // Calculando a quantidade de paginas
+  $offset = ($page - 1) * $perPage; //Calcula quanto será o offset
+  //Ex: (10 - 1) * 5
+  //Ex: 9 * 5 == 45
+
+  $query['paginate'] = true; //Marcador, adicionou [paginate]
+  $query['sql'] = "{$query['sql']} limit {$perPage} offset {$offset}";
+}
+
+function render()
+{
+  //Renderiza o sistema de paginação
+
+  global $query;
+
+  $pageCount = $query['pageCount'];
+  $links = '<ul class="pagination">';
+
+  if ($query["currentPage"] != 1) {
+    $previousPage = $query["currentPage"] - 1;
+    $previousPageStatus = $query["currentPage"] == 1 ? 'disabled' : '';
+    $linkPage = http_build_query(array_merge($_GET, ['page' => $previousPage])); // Concatena todas as variaveis do get, com a pagina atual
+
+    $links .= "<li class='page-item {$previousPageStatus}'>
+                  <a class='page-link' href='?{$linkPage}'>Anterior</a>
+                </li>";
+  }
+
+  for ($i = 1; $i <= $pageCount; $i++) {
+    $activePage = $i == $query["currentPage"] ? 'active' : '';
+    $linkPage = http_build_query(array_merge($_GET, ['page' => $i])); // Concatena todas as variaveis do get, com a pagina atual
+
+    $links .= "<li class='page-item {$activePage}'>
+    <a class='page-link' href='?{$linkPage}'>{$i}</a>
+    </li>";
+  }
+
+  if ($query["currentPage"] + 1 <= $pageCount) {
+    $nextPage = $query["currentPage"] + 1;
+    $nextPageStatus = $query["currentPage"] + 1 > $pageCount ? 'disabled' : '';
+    $linkPage = http_build_query(array_merge($_GET, ['page' => $nextPage])); // Concatena todas as variaveis do get, com a pagina atual
+
+    $links .= "<li class='page-item {$nextPageStatus}'>
+                  <a class='page-link' href='?{$linkPage}'>Next</a>
+                </li>";
+  }
+
+
+  $links .= '</ul>';
+
+  return $links;
 }
 
 function limit(string|int $limit)
@@ -257,7 +311,7 @@ function execute(bool $isFetchAll = true, bool $isRowCount = false)
   //Executa o SELECT
   global $query;
 
-  dd($query);
+  // dd($query);
 
   try {
     $connect = connect(); //Conecta ao banco
