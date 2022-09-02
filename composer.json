@@ -16,10 +16,7 @@
     "files": [
       "app/core/controller.php",
       "app/database/connect.php",
-      "app/database/fetch.php",
-      "app/database/create.php",
-      "app/database/update.php",
-      "app/database/delete.php",
+      "app/database/queries.php",
       "app/helpers/constants.php",
       "app/helpers/redirect.php",
       "app/helpers/flash.php",
@@ -29,6 +26,7 @@
       "app/helpers/helpers.php",
       "app/helpers/old.php",
       "app/helpers/csrf.php",
+      "app/helpers/image.php",
       "app/router/router.php"
     ],
     "psr-4": {

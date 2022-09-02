@@ -2,6 +2,7 @@
 
 function connect(): PDO
 {
+  //Retorna um PDO, ou seja, retorna a conexão ao banco
   return new PDO(
     "mysql:host={$_ENV['DATABASE_HOST']};dbname={$_ENV['DATABASE_NAME']}",
     $_ENV['DATABASE_USER'],

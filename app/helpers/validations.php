@@ -68,3 +68,16 @@ function minlen(string $field, string $param)
 
   return $data; // retorna um dado, igual o positivo
 }
+
+function optional(string $field)
+{
+  //Verifica se a quantidade minima de caracteres foi atingida
+  $data = filter_string_polyfill($_POST[$field]);
+  if ($data === '') {
+    //Se o campo estiver vazio, retorna null
+    return null;
+    //Retornando null, a validação de array com "false", permitira o campo ser aprovado
+  }
+
+  return $data; // retorna um dado, igual o positivo
+}

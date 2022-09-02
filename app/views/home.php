@@ -9,8 +9,13 @@
 </form>
 
 <div>
+  <h3>Usuarios</h3>
+  <p><?php echo $users->count ?> Usuarios cadastrados</p>
+</div>
+
+<div>
   <ul>
-    <?php foreach ($users as $user) : ?>
+    <?php foreach ($users->rows as $user) : ?>
     <li><?php echo $user->name ?> | <a href="/user/<?php echo $user->id ?>">detalhes</a></li>
     <?php endforeach; ?>
   </ul>

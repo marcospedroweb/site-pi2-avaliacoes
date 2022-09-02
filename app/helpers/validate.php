@@ -26,7 +26,9 @@ function validate(array $validations, bool $perisistInputs = false, bool $checkC
     setOld();
 
   //Procura no array se há algum resultado que deu false, retornando "erro"
-  if (in_array(false, $result))
+  // Com o 3° parametro "true", ele verifica APENAS resultados com valor "false"
+  // Resultados que são considerados FALSE, Ex: 0, null, '', com o true, permite esses passarem pela verificiação
+  if (in_array(false, $result, true))
     return false;
 
   //Se não houve erros apaga da sessão os dados armazenados
@@ -65,7 +67,7 @@ function multipleValidations(string $validate, string $field, string $param)
     $result[$field] = $validate($field, $param); //Executa a função de acordo com o nome
 
     // Verificando se aquele campo JÁ foi validade, se já foi validado, PARA o foreach e já retorna algum erro
-    if (isset($result[$field]) && $result[$field] === false)
+    if ($result[$field] === false || $result[$field] === null)
       break;
   }
 

@@ -10,7 +10,14 @@ class User
     if (!isset($params['user']))
       return redirect('/');
 
-    $user = findBy('users', 'id', $params['user']);
+    read('users');
+    where('id', $params['user']);
+
+    $user = execute();
+    return [
+      'view' => 'home',
+      'data' => ['title' => 'Show', 'users' => $user, 'links' => '']
+    ];
   }
 
   public function create()
@@ -34,6 +41,8 @@ class User
     if (!$validate)
       return redirect('/user/create');
 
+    dd($validate);
+
     $validate['password'] = password_hash($validate['password'], PASSWORD_DEFAULT);
 
     $created = create('users', $validate);
@@ -44,5 +53,13 @@ class User
     }
 
     return redirect('/');
+  }
+
+  public function edit()
+  {
+    return [
+      'view' => 'edit',
+      'data' => ['title' => 'Edit']
+    ];
   }
 }

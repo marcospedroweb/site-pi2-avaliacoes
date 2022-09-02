@@ -13,7 +13,8 @@ class Home
       $search = filter_string_polyfill(field: $_GET['search']);
       search(search: ['name' => $search]);
     }
-    paginate(1);
+
+    paginate(5);
 
     $users = execute();
     // dd($users);
